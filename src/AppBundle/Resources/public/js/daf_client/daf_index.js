@@ -8,20 +8,22 @@ var app = new DAF,
 
 // Objeto que almacena TODOS los datos de la aplicacion
 var DATA = {
-    machines: [],
-    services: [],
-    impact:   [],
-    criticality: []
+    machines:    [],
+    services:    [],
+    impact:      [],
+    criticality: [],
+    ldapUsers:   []
 };
 
 // Objeto para gestionar la carga inicial de datos
 var load_index = {
-    machines:   false,
-    services:   false,
-    impact:     false,
+    machines:    false,
+    services:    false,
+    impact:      false,
     criticality: false,
+    ldapUsers:   false,
     test: function() { // Testea si se ha terminado la carga inicial, y ejecuta acciones asociadas
-        if (this.machines && this.services && this.impact && this.criticality) {
+        if (this.machines && this.services && this.impact && this.criticality && this.ldapUsers) {
             index();
             modal.cargando_datos.cierra_modal();
         }
@@ -56,38 +58,10 @@ function set_action_back(obj){
     });
 }
 
-//$(document).ready (function() {
-//
-//    modal.cargando_datos.abre_modal();
-//    var data_types = ['machines', 'services'];
-//
-//    if (data_types.length == 0) {
-//        load_index.test();
-//        return false;
-//    }
-//
-//    _.each(data_types, function(td) {
-//        app.peticion (
-//            'GET', td, false, false,
-//            function(data) {
-//                DATA[td] = data;
-//                load_index[td] = true;
-//                load_index.test();
-//            },
-//            function() {
-//                //Error
-//                modal.cargando_datos.cierra_modal();
-//                modal.error_cargando_datos.abre_modal();
-//            }
-//        );
-//    });
-//});
-
-
 $(document).ready (function() {
 
     modal.cargando_datos.abre_modal();
-    var data_types = ['machines', 'services', "impact", "criticality"];
+    var data_types = ["machines", "services", "impact", "criticality", "ldapUsers"];
 
     _.each(data_types, function(td) {
         app.peticion(
