@@ -1,0 +1,123 @@
+<div class="container-fluid">
+	<div id="main_row" class="row">
+		<div id="leftSideBar" class="col-xs-3 col-md-3 col-sm-3 col-lg-3">
+			<div style="background-color:#E6E6E6; height: 20%" class="row">
+				<div class="col-xs-12 col-md-12 col-sm-12 col-lg-12">
+					<h4>Realizar una petición de Soporte</h4>
+					<p> Los campos con asterisco (*) son obligatorios.</p>
+					<p> Recibirá una notificación cuando nuestro personal
+						responda a la petición
+					</p>
+				</div>
+			</div>
+			<div style="background-color:#E6E6E6; height: 80%; margin-top:20px" class="row">
+				<div class="col-xs-12 col-md-12 col-sm-12 col-lg-12">
+					<h4>Notificaciones del Departamento</h4>
+					<small>
+						Aquí se pueden poner notificaciones importantes del CPD a los usuarios, por
+						ejemplo: <i>"El portafirmas no está en servicio por una avería</i>"
+					</small>
+					<div style="margin-top:50px">
+						<small ><i>Horario de Soporte Lunes-Viernes, 8 AM to 9PM PST</i></small>
+					</div>
+				</div>
+			</div>
+		</div>
+		<div id="foreground" class="col-xs-9 col-md-9 col-sm-9 col-lg-9">
+			<div class="row">
+				<div class="col-xs-12 col-md-12 col-sm-12 col-lg-12">
+					<h1>Petición de Soporte</h1>
+				</div>
+			</div>
+			<div class="row">
+				<div class="col-xs-12 col-md-12 col-sm-12 col-lg-12">
+					<div class="form-group">
+                        <b>Resumen de la incidencia: *</b>
+                        <input id="abstract" title="Resumen de la incidencia" class="form-control"/>
+                    </div>
+				</div>
+			</div>
+			<div class="row">
+				<div class="col-xs-12 col-md-12 col-sm-12 col-lg-12">
+					<div class="form-group">
+                        <b>Descripción detallada: *</b><br>
+                        <small>Por favor, trate de ser lo más específico posible al describir su problema. Por
+                        ejemplo, asegúrese de incluir el número de inventario si su máquina está afectada.</small>
+                        <textarea id="description" title="Descripción del problema" class="form-control"></textarea>
+						<script>
+							CKEDITOR.replace('description');
+						</script>
+                    </div>
+				</div>
+			</div>
+			<div class="row">
+				<div class="col-xs-6 col-md-6 col-sm-6 col-lg-6">
+					<b>¿El usuario afectado es distinto del que hace la solicitud?</b>
+					<div class="checkbox">
+						<label><input type="checkbox" id="differentUser"> Sí</label>
+					</div>
+				</div>
+				<div class="col-xs-6 col-md-6 col-sm-6 col-lg-6">
+					<input type="hidden" id="requestUser">
+					<div class="form-group" style="display: none">
+						<b>Usuario afectado: </b><br>
+                        <input id="issuedUser" title ="Usuario afectado" class="form-control"/>
+                    </div>
+				</div>
+			</div>
+			<div class="row">
+				<div class="col-xs-6 col-md-6 col-sm-6 col-lg-6">
+				    <b>Criticidad de la incidencia </b>
+					<select title="Nivel de criticidad" id="criticalLevel" class="form-control">
+						<option value=1>Sólo me afecta a mi</option>
+						<option value=2>Afecta a varias personas</option>
+						<option value=3>No puedo trabajar</option>
+					</select>
+					<br>
+					<b>¿Tiene alguno de estos problemas?</b>
+					<div class="checkbox">
+						<label><input type="checkbox" id="issue_1"> No funciona el portafirmas</label>
+						<label><input type="checkbox" id="issue_2"> No hay conexión a internet</label>
+						<label><input type="checkbox" id="issue_3"> Problema3</label>
+					</div>
+				</div>
+			</div>
+
+			<div class="row">
+				<div class="col-xs-6 col-md-6 col-sm-6 col-lg-6">
+					<div class="form-group">
+		      			<b>¿Hay una máquina afectada?</b> <br>
+		  				<small>Número de inventario de la máquina afectada</small>
+						<select id="inventory_number" title="Número de inventario de la máquina" class="js-example-basic-single form-control">
+							<% $.each (DATA.machines, function () {
+								print ('<option>' + this.ninventario + '</option>');
+								});%>
+						</select>
+
+					</div>
+				</div>
+				<div class="col-xs-6 col-md-6 col-sm-6 col-lg-6">
+					<div class="form-group">
+                        <b>Incluir Adjunto * </b> <br>
+                        <small>Adjunte fichero</small>
+                        <input type="file" class="form-control"/>
+                    </div>
+				</div>
+			</div>
+
+			<div class="row">
+				<div class="col-xs-12 col-md-12 col-sm-12 col-lg-12">
+					<div id="submit_new_ticket" class="form-group pull-right">
+                        <button>Enviar</button>
+                    </div>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+
+<script type="text/javascript">
+	$(document).ready(function() {
+		$(".js-example-basic-single").select2();
+	});
+</script>

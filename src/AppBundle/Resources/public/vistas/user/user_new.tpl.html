@@ -1,0 +1,215 @@
+<style>
+	#lista_services td {
+		word-wrap: break-word !important;
+		word-break: break-all !important;
+		white-space: normal !important;
+	}
+</style>
+<div class="container-fluid">
+	<div id="main_row" class="row">
+		<div id="leftSideBar" class="col-xs-3 col-md-3 col-sm-3 col-lg-3">
+			<div style="background-color:#E6E6E6; height: 20%" class="row">
+				<div class="col-xs-12 col-md-12 col-sm-12 col-lg-12">
+					<h4>Realizar una petición de Soporte</h4>
+					<p> Los campos con asterisco (*) son obligatorios.</p>
+					<p> Recibirá una notificación cuando nuestro personal
+						responda a la petición
+					</p>
+				</div>
+			</div>
+			<div style="background-color:#E6E6E6; height: 80%; margin-top:20px" class="row">
+				<div class="col-xs-12 col-md-12 col-sm-12 col-lg-12">
+					<h4>Notificaciones del Departamento</h4>
+					<small>
+						Aquí se pueden poner notificaciones importantes del CPD a los usuarios, por
+						ejemplo: <i>"El portafirmas no está en servicio por una avería</i>"
+					</small>
+					<div style="margin-top:50px">
+						<small ><i>Horario de Soporte Lunes-Viernes, 8 AM to 9PM PST</i></small>
+					</div>
+				</div>
+			</div>
+		</div>
+		<div id="foreground_newUser" class="col-xs-9 col-md-9 col-sm-9 col-lg-9">
+			<div class="row">
+				<div class="col-xs-12 col-md-12 col-sm-12 col-lg-12">
+					<h1>Alta nuevo usuario</h1>
+					<table style="table-layout:fixed" class="table table-striped table-hover ">
+						<thead>
+						<tr>
+							<th colspan="6">PERSONA SOLICITANTE</th>
+						</tr>
+						</thead>
+						<tbody>
+							<tr>
+								<td width="5%"><b>Nombre</b></td>
+								<td width="25%" contenteditable="true"></td>
+								<td width="10%"><b>Apellidos</b></td>
+								<td width="30%" contenteditable="true"></td>
+								<td width="5%"><b>NIF</b></td>
+								<td width="25%" contenteditable="true"></td>
+							</tr>
+							<tr>
+								<td width="20%"><b>Área/Departamento</b></td>
+								<td colspan="5" width="80%" contenteditable="true"></td>
+							</tr>
+						</tbody>
+					</table>
+					<table class="table table-striped table-hover ">
+						<thead>
+						<tr>
+							<th colspan="6">PERSONA A DAR DE ALTA</th>
+						</tr>
+						</thead>
+						<tbody>
+						<tr>
+							<td width="5%"><b>Nombre</b></td>
+							<td width="25%" contenteditable="true"></td>
+							<td width="10%"><b>Apellidos</b></td>
+							<td width="30%" contenteditable="true"></td>
+							<td width="5%"><b>NIF</b></td>
+							<td width="25%" contenteditable="true"></td>
+						</tr>
+						<tr>
+							<td width="20%"><b>Área/Departamento</b></td>
+							<td colspan="5" width="80%" contenteditable="true"></td>
+						</tr>
+						</tbody>
+					</table>
+					<div class="row">
+						<div class="col-xs-12 col-md-12 col-sm-12 col-lg-12"></div>
+						<div id="tabla_services_wrap">
+					<table class="table table-striped table-hover" id="services_table">
+						<thead>
+						<tr>
+							<th width="50%" data-editable="true" data-id="nombre">Tipo de usuario</th>
+							<th width="5%"  data-editable="true">Alta</th>
+							<th width="5%"  data-editable="true">Baja</th>
+							<th width="5%"  data-editable="true">Modificación</th>
+							<th width="5%"  data-editable="true">Renovación</th>
+							<th width="10%" data-editable="true">Vigencia</th>
+							<th width="20%" data-editable="true">Información añadida</th>
+						</tr>
+						</thead>
+						<!--<tbody>
+						<% $.each (DATA.services, function () {
+
+						print ('<tr>\
+							<td>\
+								<div class="checkbox">\
+									<label><input type="checkbox">' + this.nombre + '</label>\
+								</div>\
+							</td>\
+							<td>\
+								<div class="checkbox">\
+									<label><input type="checkbox"></label>\
+								</div>\
+							</td>\
+							<td>\
+								<div class="checkbox">\
+									<label><input type="checkbox"></label>\
+								</div>\
+							</td>\
+							<td>\
+								<div class="checkbox">\
+									<label><input type="checkbox"></label>\
+								</div>\
+							</td>\
+							<td>\
+								<div class="checkbox">\
+									<label><input type="checkbox"></label>\
+								</div>\
+							</td>\
+							<td></td>\
+							</tr> ');
+						});%>
+						</tbody>-->
+						<tbody id="lista_services">
+							<tr>
+								<td style="word-wrap: break-word;word-break: break-all;white-space: normal;"></td>
+								<td align="center">
+									<div class="checkbox">
+										<label><input type="checkbox"></label>
+									</div>
+								</td>
+								<td align="center">
+									<div class="checkbox">
+										<label><input type="checkbox"></label>
+									</div>
+								</td>
+								<td align="center">
+									<div class="checkbox">
+										<label><input type="checkbox"></label>
+									</div>
+								</td>
+								<td align="center">
+									<div class="checkbox">
+										<label><input type="checkbox"></label>
+									</div>
+								</td>
+								<td></td>
+								<td></td>
+							</tr>
+						</tbody>
+					</table>
+					</div>
+					<div class="row" id="controles_listado_services">
+					<div class="col-md-4">
+						<span>
+							Mostrar&nbsp;&nbsp;
+							<select id="regs_x_pag">
+								<option value=10> 10 </option>
+								<option value=25> 25 </option>
+								<option value=50> 50 </option>
+								<option value=100>100</option>
+							</select>
+							&nbsp;&nbsp;registros
+						</span>
+					</div>
+					<div class="col-md-4">
+						<div class="center">
+							Mostrando
+							<span id="primero"> </span> a
+							<span id="ultimo"> </span> de
+							<span id="total"> </span> servicios
+						</div>
+					</div>
+					<div class="col-md-4">
+						<ul class="pagination pull-right margin0">
+							<li class="inactivo">
+								<a class="pag_control" id="prev">
+									<i class="ace-icon fa fa-angle-double-left"></i>
+								</a>
+							</li>
+							<li class="activo">
+								<a class="pag_control" id="1">1</a>
+							</li>
+							<li>
+								<a class="pag_control" id="2">2</a>
+							</li>
+							<li>
+								<a class="pag_control" id="3">3</a>
+							</li>
+							<li>
+								<a class="pag_control" id="4">4</a>
+							</li>
+							<li>
+								<a class="pag_control" id="next">
+									<i class="ace-icon fa fa-angle-double-right"></i>
+								</a>
+							</li>
+						</ul>
+					</div>
+					</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+
+<script type="text/javascript">
+	$(document).ready(function() {
+		$(".js-example-basic-single").select2();
+	});
+</script>

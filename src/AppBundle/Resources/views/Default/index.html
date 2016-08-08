@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="es">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="description" content="" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Soporte Informático del Ayuntamiento de Córdoba | SISIT</title>
+
+        <!-- Estilos de Bootstrap -->
+        <link rel="stylesheet" href="../../bundles/app/css/bootstrap.min.css">
+        <link rel="stylesheet" href="../../bundles/app/css/bootstrap-theme.css" />
+
+        <!-- Colecciones de fuentes -->
+        <link rel="stylesheet" href="../../bundles/app/css/font-awesome.min.css" />
+
+        <!-- Estilos de plugins -->
+        <link href="../../bundles/app/css/toastr.css" rel="stylesheet"  />
+        <link href="../../bundles/app/select2-4.0.3/dist/css/select2.min.css" rel="stylesheet"  />
+
+
+        <!-- Estilos Generales-->
+        <link href="../../bundles/app/css/plantilla.css" rel="stylesheet"  />
+        <link href="../../bundles/app/css/main.css" rel="stylesheet"  />
+        <!--<link href="../../bundles/app/css/header.css" rel="stylesheet"  />-->
+
+        <!-- Estilos de la aplicación -->
+        <link href="../../bundles/app/css/app.css" rel="stylesheet"  />
+        <!--<link href="../../bundles/app/css/odoo/odoo.css" rel="stylesheet"/>-->
+
+        <!-- Favicon -->
+        <link rel="icon" type="image/x-icon" href="../../git checkfavicon.ico" />
+    </head>
+
+    <body class="no-skin">
+        <!-- CABECERA -->
+        <div id="cabecera" class="navbar">
+            <div class="navbar-container" id="navbar-container">
+
+                <!-- LOGO DE LA IZQUIERDA -->
+                <div class="navbar-header pull-left" style="height:52px;">
+                    <div class="logo_header">
+                        <a href="javascript://">
+                            <img src="../../bundles/app/img/logo0.png" width="100px"/>
+                        </a>
+                    </div>
+                    <h3 class="texto_header">| Soporte Informático del Ayuntamiento de Córdoba</h3>
+                </div>
+ 
+                <!-- BOTONES Y USUARIO DE LA DERECHA -->
+                <div id="menu-usuario" class="navbar-buttons navbar-header pull-right" role="navigation">
+                    <!--<a id="nombre-usuario" data-toggle="dropdown" href="javascript:username()" class="dropdown-toggle">
+                        <i class="ace-icon fa fa-caret-down"></i>
+                    </a>
+                    <ul class="user-menu dropdown-menu-right dropdown-menu dropdown-yellow dropdown-caret dropdown-close">
+                        <li>
+                            <a href="javascript:logout()">
+                                <i class="ace-icon fa fa-power-off"></i>
+                                Logout
+                            </a>
+                        </li>
+                    </ul>-->
+                </div>
+            </div>
+        </div>
+
+        <!-- CONTENEDOR GENERAL -->
+        <div class="main-container" id="main-container">
+
+            <!-- CONTENEDOR APLICACIÓN -->
+            <div class="main-content">
+                <div class="main-content-inner">
+                    <!-- INICIO APLICACIÓN -->
+                    <div class="page-content" style="padding: 0px;">
+                        <div class="container-fluid" id="inicio">
+                            <div id="main_container"></div>
+                        </div>
+                    </div>              
+                </div>
+            </div>
+
+            <!-- PIE DE PAGINA -->
+            <div class="footer">
+                <div class="footer-inner">
+                    <div class="footer-content">
+                        <div class="center">
+                            Sistema de Información de Servicios Informáticos y de Telecomunicaciones. | SISIT
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <a href="javascript://" id="btn-scroll-up" class="btn-scroll-up btn btn-sm btn-inverse">
+                <i class="ace-icon fa fa-angle-double-up fa fa-only bigger-110"></i>
+            </a>
+        </div>
+
+        <!-- MODALES DAF -->
+        <div id="cargando_datos" class="daf_modal" data-width="350px" data-height="150px" >
+            <h3 style="margin:40px 40px;">Cargando datos...</h3>
+        </div>
+
+        <div id="error_cargando_datos" class="daf_modal" data-width="350px" data-height="150px" >
+            <h3 style="margin:11px 11px;color: #d00; text-align: center;">
+                ERROR al Cargar datos desde el servidor.<br/><br/>
+                <span style="font-size:0.7em;font-weight: bold;">Pulse F5 para volver a intentarlo.</span>
+            </h3>
+        </div>
+
+        <!-- Dependencias: Jquery 1.11.3, Bootstrap 3.3.6, y underscore -->
+        <!--<script type="text/javascript" src="../../bundles/app/js/jquery-1.11.3.min.js"></script>-->
+        <script type="text/javascript" src="../../bundles/app/js/jquery-1.12.4.min.js"></script>
+        <script type="text/javascript" src="../../bundles/app/js/bootstrap.min.js"></script>
+        <script type="text/javascript" src="../../bundles/app/js/underscore-min.js"></script>
+
+        <!-- Plantilla -->
+        <script src="../../bundles/app/js/plantilla.js" ></script>
+
+        <!-- Plugins -->
+        <script type="text/javascript" src="../../bundles/app/js/toastr.js"></script>
+        <script src="../../bundles/app/ckeditor/ckeditor.js" ></script>
+        <script src="../../bundles/app/select2-4.0.3/dist/js/select2.full.min.js"></script>
+
+        <!-- DAF -->
+        <script src="../../daf/v.0.5/daf.js" ></script>
+        <script src="../../daf/v.0.5/plugins/utiles/daf.utiles.js" ></script>
+        <script src="../../daf/v.0.5/plugins/validar/daf.validar.js" ></script>
+        <script src="../../daf/v.0.5/plugins/modal/daf.modal.js" ></script>
+        <script src="../../daf/v.0.5/plugins/paginador/daf.paginador.js" ></script>
+        <script src="../../daf/v.0.5/plugins/filtro/daf.filtro.js" ></script>
+        <script src="../../daf/v.0.5/plugins/tabla/daf.tabla.js" ></script>
+        <script src="../../daf/v.0.5/plugins/urls/daf.urls.js" ></script>
+        <script src="../../daf/v.0.5/plugins/vistas/daf.vistas.js" ></script>
+        <script src="../../daf/v.0.5/plugins/csv/daf.csv.js" ></script>
+
+        <!-- Aplicación -->
+        <script src="../../bundles/app/js/app.js" ></script>
+
+        <!-- cliente DAF -->
+        <script src="../../bundles/app/js/daf_client/daf_index.js" ></script>
+        <script src="../../bundles/app/js/daf_client/daf_controller.js" ></script>
+        <script src="../../bundles/app/js/daf_client/daf_router.js" ></script>
+    </body>
+</html>

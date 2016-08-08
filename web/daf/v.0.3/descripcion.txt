@@ -1,0 +1,39 @@
+﻿Última revisión - 09/06/2016
+
+Aplicaciones que la usan hasta la fecha:
+
+A06ImpresorasPPU
+A07DirectorioUCP
+A08ItemsInformaticos
+
+Mejoras respecto a versión anterior:
+
+- daf.paginador.js,
+		* Tiene un nuevo metodo get_datos, que devuelve los datos que recibió el paginador para paginar.
+		* El callback del paginador pasa ahora 2 parametros, el que ya pasaba, los objetos paginados, y el propio objeto como segundo parametro.
+
+- daf.tabla.js,
+		* Tiene una nueva propiedad, this.filas_op_columnas, que es un array donde se almacenan filas que contienen valores resultantes de operaciones especificas sobre columnas, pasadas ambas como parametro. Se setean antes de cargar registros con el metodo set_fila_op_columna.
+		* Mejorada gestión de anchos de tabla, aunque hay que refactorizar y mejorar esta parte del codigo.
+		* La tabla se adapta al ancho del div padre, si este es superior al ancho de la tabla.
+
+- daf.utiles.js,
+		* Añadido metod fecha_2obj, que recibe un string fecha en español o ingles y devuelve un objeto fecha.
+
+- daf.formato.js,
+		* Nuevo plugin para los formatos
+
+Correciones posteriores:
+
+- daf.tabla.js,
+		* Al enviar valores al callback de columna cambiada, no enviaba bien el id de columna. Corregido.
+
+- daf.consultas.js,
+		* Y borra bien las consultas.
+
+- daf.filtros.js,
+		* En el metodo aplicar filtros, no vacia el array de filtros pasado como parametro. Antes lo vaciaba y repercutia en la aplicación host.
+		* Si recibe un array vacio a filtrar, en metodo aplicar_filtro devuelve un array vacio antes daba error controlado en consola.
+
+-daf.utiles.js,
+		* si get_fecha recibe una fecha en formato string que ya está en castellano la devuelve tal cual, en vez de devolver "".

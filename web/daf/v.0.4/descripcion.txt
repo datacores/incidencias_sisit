@@ -1,0 +1,24 @@
+﻿Última revisión - 09/06/2016
+
+Esta actualización ha sido motivada por:
+	* Refactorización de daf.tabla.js, para poder tener dos valores en cada celda, uno para la vista y otro para operar.
+	* Refactorización de utiles y fechas, eliminando metodos antiguos.
+
+Aplicaciones que la usan hasta la fecha:
+
+A06ImpresorasPPU
+
+Mejoras respecto a versión anterior:
+
+
+Correciones posteriores:
+
+Objetivos de esta version:
+
+	- Encapsular todas las clases dentrod e DAF: 
+		por ejemplo en vez de instanciar:
+			var app = new DAF,
+				vista = new Vista(...);
+		sería
+			var app = new DAF,
+				vista = new app.Vista;
