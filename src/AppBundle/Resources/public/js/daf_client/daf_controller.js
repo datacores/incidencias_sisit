@@ -43,9 +43,9 @@ var $getTicket = function($cv) {
         issuedUser:         $cv.find('#issuedUser').val(),
         requestUser:        $cv.find('#requestUser').val(),
         criticalLevel:      $cv.find('#criticalLevel option:selected').text(),
-        material_needed_1:  $cv.find('#material_needed_1').is(':checked'),
-        material_needed_2:  $cv.find('#material_needed_2').is(':checked'),
-        material_details:   CKEDITOR.instances['material_details'].getData(),
+        // material_needed_1:  $cv.find('#material_needed_1').is(':checked'),
+        // material_needed_2:  $cv.find('#material_needed_2').is(':checked'),
+        // material_details:   CKEDITOR.instances['material_details'].getData(),
         inventory_number:   $cv.find('#inventory_number option:selected').text(),
         commonError:        $cv.find('#issue_1').is(':checked') || $cv.find('#issue_2').is(':checked') ||
                             $cv.find('#issue_3').is(':checked')

@@ -67,11 +67,11 @@
 			</div>
 			<div class="row">
 				<div class="col-xs-6 col-md-6 col-sm-6 col-lg-6">
-				    <b>Criticidad de la incidencia </b>
+				    <b>Impacto de la incidencia </b>
 					<select title="Nivel de criticidad" id="criticalLevel" class="form-control">
-						<option value=1>Sólo me afecta a mi</option>
-						<option value=2>Afecta a varias personas</option>
-						<option value=3>No puedo trabajar</option>
+						<% $.each (DATA.impact, function () {
+						print ('<option value=' + this.id + '>' + this.impacto + '</option>');
+						});%>
 					</select>
 					<br>
 					<b>¿Tiene alguno de estos problemas?</b>

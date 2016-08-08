@@ -9,15 +9,17 @@ var app = new DAF,
 // Objeto que almacena TODOS los datos de la aplicacion
 var DATA = {
     machines: [],
-    services: []
+    services: [],
+    impact:   []
 };
 
 // Objeto para gestionar la carga inicial de datos
 var load_index = {
     machines:   false,
     services:   false,
+    impact:     false,
     test: function() { // Testea si se ha terminado la carga inicial, y ejecuta acciones asociadas
-        if (this.machines && this.services) {
+        if (this.machines && this.services && this.impact) {
             index();
             modal.cargando_datos.cierra_modal();
         }
@@ -83,7 +85,7 @@ function set_action_back(obj){
 $(document).ready (function() {
 
     modal.cargando_datos.abre_modal();
-    var data_types = ['machines', 'services'];
+    var data_types = ['machines', 'services', "impact"];
 
     _.each(data_types, function(td) {
         app.peticion(

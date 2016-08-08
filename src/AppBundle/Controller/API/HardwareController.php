@@ -37,4 +37,17 @@ class HardwareController extends Controller
         );
         return new JsonResponse($services);
     }
+
+    /**
+     * @Route("/impact")
+     * @return JsonResponse
+     */
+    public function getImpact()
+    {
+        $conn = $this->get('database_connection');
+        $impact = $conn->fetchAll(
+            'SELECT * FROM sisit.impacto'
+        );
+        return new JsonResponse($impact);
+    }
 }
