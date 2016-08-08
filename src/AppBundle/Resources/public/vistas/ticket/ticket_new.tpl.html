@@ -66,22 +66,29 @@
 				</div>
 			</div>
 			<div class="row">
-				<div class="col-xs-6 col-md-6 col-sm-6 col-lg-6">
-				    <b>Impacto de la incidencia </b>
-					<select title="Nivel de criticidad" id="criticalLevel" class="form-control">
-						<% $.each (DATA.impact, function () {
-						print ('<option value=' + this.id + '>' + this.impacto + '</option>');
-						});%>
-					</select>
-					<br>
-					<b>¿Tiene alguno de estos problemas?</b>
-					<div class="checkbox">
-						<label><input type="checkbox" id="issue_1"> No funciona el portafirmas</label>
-						<label><input type="checkbox" id="issue_2"> No hay conexión a internet</label>
-						<label><input type="checkbox" id="issue_3"> Problema3</label>
-					</div>
+			<div class="col-xs-6 col-md-6 col-sm-6 col-lg-6">
+				<b>Impacto de la incidencia </b>
+				<select title="Nivel de impacto" id="impactLevel" class="form-control">
+					<% $.each (DATA.impact, function () {
+					print ('<option value=' + this.id + '>' + this.impacto + '</option>');
+					});%>
+				</select>
+				<br>
+				<b>Criticidad de la incidencia </b>
+				<select title="Nivel de criticidad" id="criticalLevel" class="form-control">
+					<% $.each (DATA.criticality, function () {
+					print ('<option value=' + this.id + '>' + this.criticidad + '</option>');
+					});%>
+				</select>
+				<br>
+				<b>¿Tiene alguno de estos problemas?</b>
+				<div class="checkbox">
+					<label><input type="checkbox" id="issue_1"> No funciona el portafirmas</label>
+					<label><input type="checkbox" id="issue_2"> No hay conexión a internet</label>
+					<label><input type="checkbox" id="issue_3"> Problema3</label>
 				</div>
 			</div>
+		</div>
 
 			<div class="row">
 				<div class="col-xs-6 col-md-6 col-sm-6 col-lg-6">

@@ -50,4 +50,17 @@ class HardwareController extends Controller
         );
         return new JsonResponse($impact);
     }
+
+    /**
+     * @Route("/criticality")
+     * @return JsonResponse
+     */
+    public function getCriticality()
+    {
+        $conn = $this->get('database_connection');
+        $criticality = $conn->fetchAll(
+            'SELECT * FROM sisit.criticidad'
+        );
+        return new JsonResponse($criticality);
+    }
 }

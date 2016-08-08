@@ -126,6 +126,11 @@ class appDevUrlMatcher extends Symfony\Bundle\FrameworkBundle\Routing\Redirectab
             return array (  '_controller' => 'AppBundle\\Controller\\API\\HardwareController::getImpact',  '_route' => 'app_api_hardware_getimpact',);
         }
 
+        // app_api_hardware_getcriticality
+        if ($pathinfo === '/criticality') {
+            return array (  '_controller' => 'AppBundle\\Controller\\API\\HardwareController::getCriticality',  '_route' => 'app_api_hardware_getcriticality',);
+        }
+
         // app_api_ldap_get_usuarios
         if ($pathinfo === '/ldapUsers') {
             return array (  '_controller' => 'AppBundle\\Controller\\API\\LdapController::get_usuarios',  '_route' => 'app_api_ldap_get_usuarios',);
