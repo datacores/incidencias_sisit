@@ -109,22 +109,6 @@ function ticket_preConfirm_controller(){
     set_action_back($cv);
 }
 
-var $getUser = function($cv) {
-    return {
-
-        abstract:           $cv.find('#abstract').val(),
-        description:        CKEDITOR.instances['description'].getData(),
-        issuedUser:         $cv.find('#issuedUser').val(),
-        requestUser:        $cv.find('#requestUser').val(),
-        impactLevel:        $cv.find('#impactLevel option:selected').text(),
-        criticalLevel:      $cv.find('#criticalLevel option:selected').text(),
-        inventory_number:   $cv.find('#inventory_number option:selected').text(),
-        commonError:        $cv.find('#issue_1').is(':checked') || $cv.find('#issue_2').is(':checked') ||
-        $cv.find('#issue_3').is(':checked'),
-        user:               $cv.find('#issuedUser').val()
-    };
-};
-
 function ticket_managingError_controller(){}
 
 function user_preConfirm_controller(){
@@ -140,6 +124,7 @@ function ticket_new_controller() {
         $processTicket($newTicket);
     });
 
+
     $cv.find('#differentUser').off('click');
     $cv.find('#differentUser').on('click', function() {
         if ($('#differentUser').is(':checked')){
@@ -150,10 +135,38 @@ function ticket_new_controller() {
     });
 }
 
+var getUser = function(cv, services) {
+    return {
+        user_name:      cv.find('#new_user_name').val(),
+        user_surname:   cv.find('#new_user_surname').val(),
+        user_nif:       cv.find('#new_user_nif').val(),
+        user_dpt:       cv.find('#new_user_dpt').val(),
+        user_services:  services
+    };
+};
+
+var processUser = function ($newUser) {
+
+    view.user_preConfirm.render();
+
+    var $cv = $('#foreground_newUser_preConfirm');
+    $cv.find('#new_user_name_label').val($newUser.user_name);
+    $cv.find('#new_user_surname_label').val($newUser.user_surname);
+    $cv.find('#new_user_nif_label').val($newUser.user_nif);
+    $cv.find('#new_user_dpt_label').val($newUser.user_dpt);
+
+    console.log($newUser);
+
+    // $newUser.user_services.each(function() {
+    //     $cv.find('#new_user_services_label').append(
+    //         $(this).name + '-' + $(this).action + '<br>'
+    //     );
+    // });
+};
+
 function user_new_controller() {
 
     routing.push('user_new');
-
     var cv                             = $('#foreground_newUser'),
         tabla_services                 = new Tabla ('services_table', true, true),
         filtro_columnas_services       = new Filtro,
@@ -161,6 +174,33 @@ function user_new_controller() {
 
     var paginador_services = new Paginador('#controles_listado_services', true, DATA.services, function (datos_paginados) {
         tabla_services.carga_registros(datos_paginados, 'id', function () {
+        });
+    });
+
+    services = [];
+    cv.find('.checkbox').on('click', function(ev) {
+        var id      = ev.currentTarget.getAttribute('data-id');
+        var col     = $(this).parent().index();
+        var action;
+
+        switch (col) {
+            case 1:
+                action = 'alta';
+                break;
+            case 2:
+                action = 'baja';
+                break;
+            case 3:
+                action = 'modificacion';
+                break;
+            case 4:
+                action = 'renovacion';
+                break;
+        }
+
+        services.push({
+            name: id,
+            action: action
         });
     });
 
@@ -195,6 +235,9 @@ function user_new_controller() {
 
     cv.find('#submit_new_user').off('click');
     cv.find('#submit_new_user').on('click', function(ev) {
+        var $newUser = getUser(cv, services);
+        console.log(services);
+        processUser($newUser);
         view.user_preConfirm.render();
     });
 }
