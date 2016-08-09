@@ -47,10 +47,11 @@ var $getTicket = function($cv) {
         issuedUser:         $cv.find('#issuedUser').val(),
         requestUser:        $cv.find('#requestUser').val(),
         impactLevel:        $cv.find('#impactLevel option:selected').text(),
-        criticalLevel:        $cv.find('#criticalLevel option:selected').text(),
+        criticalLevel:      $cv.find('#criticalLevel option:selected').text(),
         inventory_number:   $cv.find('#inventory_number option:selected').text(),
         commonError:        $cv.find('#issue_1').is(':checked') || $cv.find('#issue_2').is(':checked') ||
-                            $cv.find('#issue_3').is(':checked')
+                            $cv.find('#issue_3').is(':checked'),
+        user:               $cv.find('#issuedUser').val()
     };
 };
 
@@ -66,11 +67,14 @@ var $processTicket = function ($newTicket) {
         $('#criticalLevel_label').text($newTicket.criticalLevel);
         $('#impactLevel_label').text($newTicket.impactLevel);
 
-
         $setMaterial($newTicket.material_needed_1, $newTicket.material_needed_2);
 
         $('#material_details_label').append($.parseHTML($newTicket.material_details));
         $('#inventory_number_label').text($newTicket.inventory_number);
+
+        $user = _.findWhere(DATA.ldapUsers, { usuario_id: $newTicket.user});
+        $('#issuedUser_name_label').text($user.displayname);
+        $('#issuedUser_login_label').text($user.usuario_id);
     }
 };
 
