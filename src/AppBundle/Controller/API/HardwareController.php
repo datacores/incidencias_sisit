@@ -45,9 +45,7 @@ class HardwareController extends Controller
     public function getImpact()
     {
         $conn = $this->get('database_connection');
-        $impact = $conn->fetchAll(
-            'SELECT * FROM sisit.impacto'
-        );
+        $impact = $conn->fetchAll('SELECT * FROM sisit.impacto');
         return new JsonResponse($impact);
     }
 
@@ -58,9 +56,7 @@ class HardwareController extends Controller
     public function getCriticality()
     {
         $conn = $this->get('database_connection');
-        $criticality = $conn->fetchAll(
-            'SELECT * FROM sisit.criticidad'
-        );
+        $criticality = $conn->fetchAll('SELECT * FROM sisit.criticidad');
         return new JsonResponse($criticality);
     }
 }

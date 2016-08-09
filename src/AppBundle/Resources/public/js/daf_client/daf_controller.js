@@ -7,7 +7,11 @@ function upper_menu_controller() {
 
     $container.find('#home').on('click', function() {
         view.index.render();
-    });    
+    });
+
+    $container.find('#ticket_management').on('click', function () {
+        view.ticket_new.render();
+    });
 }
 
 function index_controller() {
@@ -44,9 +48,6 @@ var $getTicket = function($cv) {
         requestUser:        $cv.find('#requestUser').val(),
         impactLevel:        $cv.find('#impactLevel option:selected').text(),
         criticalLevel:        $cv.find('#criticalLevel option:selected').text(),
-        // material_needed_1:  $cv.find('#material_needed_1').is(':checked'),
-        // material_needed_2:  $cv.find('#material_needed_2').is(':checked'),
-        // material_details:   CKEDITOR.instances['material_details'].getData(),
         inventory_number:   $cv.find('#inventory_number option:selected').text(),
         commonError:        $cv.find('#issue_1').is(':checked') || $cv.find('#issue_2').is(':checked') ||
                             $cv.find('#issue_3').is(':checked')
@@ -63,6 +64,8 @@ var $processTicket = function ($newTicket) {
         $('#issuedUser_label').text($newTicket.issuedUser);
         $('#requestUser_label').text($newTicket.requestUser);
         $('#criticalLevel_label').text($newTicket.criticalLevel);
+        $('#impactLevel_label').text($newTicket.impactLevel);
+
 
         $setMaterial($newTicket.material_needed_1, $newTicket.material_needed_2);
 
