@@ -56,10 +56,10 @@
     margin-top: 10%;
 }
 
-body {
-    margin-left: 10%;
-    margin-right: 10%;
-}
+/*body {*/
+    /*margin-left: 10%;*/
+    /*margin-right: 10%;*/
+/*}*/
 
 #leftSideBar {
     width: 25%;
@@ -80,5 +80,5 @@ body {
 
 ul.pagination {
     height: 40px;
-    width: 210px;
+    /*width: 210px;*/
 }

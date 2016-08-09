@@ -66,19 +66,19 @@
 					<div class="row">
 						<div class="col-xs-4 col-md-4 col-sm-4 col-lg-4">
 							<div class="form-group">
-								<b>Nombre: </b>
+								<b>Nombre </b>
 								<input title="Nombre" class="form-control"/>
 							</div>
 						</div>
 						<div class="col-xs-6 col-md-6 col-sm-6 col-lg-6">
 							<div class="form-group">
-								<b>Apellidos: </b>
+								<b>Apellidos </b>
 								<input title="Apellidos" class="form-control"/>
 							</div>
 						</div>
 						<div class="col-xs-2 col-md-2 col-sm-2 col-lg-2">
 							<div class="form-group">
-								<b>NIF: </b>
+								<b>NIF </b>
 								<input title="NIF" class="form-control"/>
 							</div>
 						</div>
@@ -86,7 +86,7 @@
 					<div class="row">
 						<div class="col-xs-12 col-md-12 col-sm-12 col-lg-12">
 							<div class="form-group">
-								<b>Área/Departamento: </b>
+								<b>Área/Departamento </b>
 								<input title="Departamento" class="form-control"/>
 							</div>
 						</div>
@@ -99,19 +99,19 @@
 					<div class="row">
 						<div class="col-xs-4 col-md-4 col-sm-4 col-lg-4">
 							<div class="form-group">
-								<b>Nombre: </b>
+								<b>Nombre </b>
 								<input title="Nombre" class="form-control"/>
 							</div>
 						</div>
 						<div class="col-xs-6 col-md-6 col-sm-6 col-lg-6">
 							<div class="form-group">
-								<b>Apellidos: </b>
+								<b>Apellidos </b>
 								<input title="Apellidos" class="form-control"/>
 							</div>
 						</div>
 						<div class="col-xs-2 col-md-2 col-sm-2 col-lg-2">
 							<div class="form-group">
-								<b>NIF: </b>
+								<b>NIF </b>
 								<input title="NIF" class="form-control"/>
 							</div>
 						</div>
@@ -119,109 +119,120 @@
 					<div class="row">
 						<div class="col-xs-12 col-md-12 col-sm-12 col-lg-12">
 							<div class="form-group">
-								<b>Área/Departamento: </b>
+								<b>Área/Departamento </b>
 								<input title="Departamento" class="form-control"/>
 							</div>
 						</div>
 					</div>
+
+
 					<div class="row">
-						<div class="col-xs-12 col-md-12 col-sm-12 col-lg-12"></div>
-						<div id="tabla_services_wrap">
-							<table class="table table-striped table-hover" id="services_table">
-								<thead>
-								<tr>
-									<th width="30%" data-id="nombre">Tipo de usuario</th>
-									<th width="5%"  data-editable="true">Alta</th>
-									<th width="5%"  data-editable="true">Baja</th>
-									<th width="5%"  data-editable="true">Modificación</th>
-									<th width="5%"  data-editable="true">Renovación</th>
-									<th width="10%" data-editable="true">Vigencia</th>
-									<th width="40%" data-editable="true">Información añadida</th>
-								</tr>
-								</thead>
-								<tbody id="lista_services">
-								<tr>
-									<td style="word-wrap: break-word;word-break: break-all;white-space: normal;"></td>
-									<td align="center">
-										<div class="checkbox">
-											<label><input type="checkbox"></label>
-										</div>
-									</td>
-									<td align="center">
-										<div class="checkbox">
-											<label><input type="checkbox"></label>
-										</div>
-									</td>
-									<td align="center">
-										<div class="checkbox">
-											<label><input type="checkbox"></label>
-										</div>
-									</td>
-									<td align="center">
-										<div class="checkbox">
-											<label><input type="checkbox"></label>
-										</div>
-									</td>
-									<td></td>
-									<td></td>
-								</tr>
-								</tbody>
-							</table>
-						</div>
-						<div class="row" id="controles_listado_services">
-							<div class="col-md-4">
-								<span>
-									Mostrar&nbsp;&nbsp;
-									<select id="regs_x_pag">
-										<option value=10> 10 </option>
-										<option value=25> 25 </option>
-										<option value=50> 50 </option>
-										<option value=100>100</option>
-									</select>
-									&nbsp;&nbsp;registros
-								</span>
-							</div>
-							<div class="col-md-4">
-								<div class="center">
-									Mostrando
-									<span id="primero"> </span> a
-									<span id="ultimo"> </span> de
-									<span id="total"> </span> servicios
-								</div>
-							</div>
-							<div class="col-md-4">
-								<ul class="pagination pull-right margin0">
-									<li class="inactivo">
-										<a class="pag_control" id="prev">
-											<i class="ace-icon fa fa-angle-double-left"></i>
-										</a>
-									</li>
-									<li class="activo">
-										<a class="pag_control" id="1">1</a>
-									</li>
-									<li>
-										<a class="pag_control" id="2">2</a>
-									</li>
-									<li>
-										<a class="pag_control" id="3">3</a>
-									</li>
-									<li>
-										<a class="pag_control" id="4">4</a>
-									</li>
-									<li>
-										<a class="pag_control" id="next">
-											<i class="ace-icon fa fa-angle-double-right"></i>
-										</a>
-									</li>
-								</ul>
+						<div class="col-xs-12 col-md-12 col-sm-12 col-lg-12">
+							<div id="tabla_services_wrap">
+								<table class="table table-striped table-hover" id="services_table">
+									<thead>
+									<tr>
+										<th width="30%" data-id="nombre">Tipo de usuario</th>
+										<th style="text-align: center" width="5%"  data-editable="true">Alta</th>
+										<th style="text-align: center" width="5%"  data-editable="true">Baja</th>
+										<th style="text-align: center" width="5%"  data-editable="true">Modificación</th>
+										<th style="text-align: center" width="5%"  data-editable="true">Renovación</th>
+										<th style="text-align: center" width="10%" data-editable="true">Vigencia</th>
+										<th style="text-align: center" width="40%" data-editable="true">Información añadida</th>
+									</tr>
+									</thead>
+									<tbody id="lista_services">
+									<tr>
+										<td></td>
+										<td align="center">
+											<div class="checkbox">
+												<label><input type="checkbox"></label>
+											</div>
+										</td>
+										<td align="center">
+											<div class="checkbox">
+												<label><input type="checkbox"></label>
+											</div>
+										</td>
+										<td align="center">
+											<div class="checkbox">
+												<label><input type="checkbox"></label>
+											</div>
+										</td>
+										<td align="center">
+											<div class="checkbox">
+												<label><input type="checkbox"></label>
+											</div>
+										</td>
+										<td align="center">
+											<div>
+												<label><textarea style="width: 100% ;background-color: transparent; height: 34px"></textarea></label>
+											</div>
+										</td>
+										<td align="center">
+											<div>
+												<label><textarea style="width: 100% ;background-color: transparent; height: 34px"></textarea></label>
+											</div>
+										</td>
+									</tr>
+									</tbody>
+								</table>
 							</div>
 						</div>
 					</div>
-					<div class="row">
-						<div class="col-xs-12 col-md-12 col-sm-12 col-lg-12">
-							<div id="submit_new_user" class="form-group pull-right">
-								<button>Enviar</button>
+					<div class="row" id="controles_listado_services">
+						<div class="col-md-4">
+							<span>
+								Mostrar&nbsp;&nbsp;
+								<select id="regs_x_pag">
+									<option value=10> 10 </option>
+									<option value=25> 25 </option>
+									<option value=50> 50 </option>
+									<option value=100>100</option>
+								</select>
+								&nbsp;&nbsp;registros
+							</span>
+						</div>
+						<div class="col-md-4">
+							<div class="center">
+								Mostrando
+								<span id="primero"> </span> a
+								<span id="ultimo"> </span> de
+								<span id="total"> </span> servicios
 							</div>
+						</div>
+						<div class="col-md-4">
+							<ul class="pagination pull-right margin0">
+								<li class="inactivo">
+									<a class="pag_control" id="prev">
+										<i class="ace-icon fa fa-angle-double-left"></i>
+									</a>
+								</li>
+								<li class="activo">
+									<a class="pag_control" id="1">1</a>
+								</li>
+								<li>
+									<a class="pag_control" id="2">2</a>
+								</li>
+								<li>
+									<a class="pag_control" id="3">3</a>
+								</li>
+								<li>
+									<a class="pag_control" id="4">4</a>
+								</li>
+								<li>
+									<a class="pag_control" id="next">
+										<i class="ace-icon fa fa-angle-double-right"></i>
+									</a>
+								</li>
+							</ul>
+						</div>
+					</div>
+				</div>
+				<div class="row">
+					<div class="col-xs-12 col-md-12 col-sm-12 col-lg-12">
+						<div id="submit_new_user" class="form-group pull-right">
+							<button>Enviar</button>
 						</div>
 					</div>
 				</div>
