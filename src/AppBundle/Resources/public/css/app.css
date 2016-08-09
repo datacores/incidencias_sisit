@@ -41,8 +41,13 @@
     margin-left: 0;
     width: 70%;
 }
-
 #foreground_newUser {
+    background-color:#F2F2F2;
+    margin-left: 0;
+    width: 70%;
+}
+
+#foreground_newUser_preConfirm {
     background-color:#F2F2F2;
     margin-left: 0;
     width: 70%;

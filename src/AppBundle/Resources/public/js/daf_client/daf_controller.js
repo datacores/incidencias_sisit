@@ -109,7 +109,28 @@ function ticket_preConfirm_controller(){
     set_action_back($cv);
 }
 
+var $getUser = function($cv) {
+    return {
+
+        abstract:           $cv.find('#abstract').val(),
+        description:        CKEDITOR.instances['description'].getData(),
+        issuedUser:         $cv.find('#issuedUser').val(),
+        requestUser:        $cv.find('#requestUser').val(),
+        impactLevel:        $cv.find('#impactLevel option:selected').text(),
+        criticalLevel:      $cv.find('#criticalLevel option:selected').text(),
+        inventory_number:   $cv.find('#inventory_number option:selected').text(),
+        commonError:        $cv.find('#issue_1').is(':checked') || $cv.find('#issue_2').is(':checked') ||
+        $cv.find('#issue_3').is(':checked'),
+        user:               $cv.find('#issuedUser').val()
+    };
+};
+
 function ticket_managingError_controller(){}
+
+function user_preConfirm_controller(){
+
+}
+
 function ticket_new_controller() {
     routing.push('ticket_new');
     var $cv = $('#foreground');
@@ -133,7 +154,7 @@ function user_new_controller() {
 
     routing.push('user_new');
 
-    var cv                             = $('#foreground_preConfirm'),
+    var cv                             = $('#foreground_newUser'),
         tabla_services                 = new Tabla ('services_table', true, true),
         filtro_columnas_services       = new Filtro,
         filtro_services                = new Filtro;
@@ -171,4 +192,9 @@ function user_new_controller() {
         );
         paginador_services.refrescar();
     }
+
+    cv.find('#submit_new_user').off('click');
+    cv.find('#submit_new_user').on('click', function(ev) {
+        view.user_preConfirm.render();
+    });
 }

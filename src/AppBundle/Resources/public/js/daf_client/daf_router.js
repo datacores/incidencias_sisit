@@ -37,5 +37,11 @@ var routing = [],
             '../../bundles/app/vistas/user/user_new.tpl.html',
             user_new_controller,
             $('#main_container')
+        ),
+
+        user_preConfirm: new Vista (
+            '../../bundles/app/vistas/user/user_preConfirm.tpl.html',
+            user_preConfirm_controller,
+            $('#main_container')
         )
     };

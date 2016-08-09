@@ -1,0 +1,144 @@
+<style>
+    #lista_services td {
+        word-wrap: break-word !important;
+        word-break: break-all !important;
+        white-space: normal !important;
+    }
+
+    ul.pagination {
+        display: inline-block;
+        padding: 0;
+        margin: 0;
+    }
+
+    ul.pagination li {display: inline;}
+
+    li.activo, li.activo>a, li.activo>a.pag_control {
+        border-color: grey !important;
+        background-color: grey !important;
+        color: #fff !important;
+    }
+
+    ul.pagination li.active a, ul.pagination li a:hover {
+        border-color: grey !important;
+        background-color: grey !important;
+        color: #fff !important;
+    }
+
+    ul.pagination li a {
+        color: grey !important;
+    }
+</style>
+<div class="container-fluid">
+    <div id="main_row" class="row">
+        <div id="leftSideBar" class="col-xs-3 col-md-3 col-sm-3 col-lg-3">
+            <div style="background-color:#E6E6E6; height: 20%" class="row">
+                <div class="col-xs-12 col-md-12 col-sm-12 col-lg-12">
+                    <h4>Realizar una petición de Soporte</h4>
+                    <p> Los campos con asterisco (*) son obligatorios.</p>
+                    <p> Recibirá una notificación cuando nuestro personal
+                        responda a la petición
+                    </p>
+                </div>
+            </div>
+            <div style="background-color:#E6E6E6; height: 80%; margin-top:20px" class="row">
+                <div class="col-xs-12 col-md-12 col-sm-12 col-lg-12">
+                    <h4>Notificaciones del Departamento</h4>
+                    <small>
+                        Aquí se pueden poner notificaciones importantes del CPD a los usuarios, por
+                        ejemplo: <i>"El portafirmas no está en servicio por una avería</i>"
+                    </small>
+                    <div style="margin-top:50px">
+                        <small ><i>Horario de Soporte Lunes-Viernes, 8 AM to 9PM PST</i></small>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div id="foreground_newUser_preConfirm" class="col-xs-9 col-md-9 col-sm-9 col-lg-9">
+            <div class="row">
+                <div class="col-xs-12 col-md-12 col-sm-12 col-lg-12">
+                    <h4>Persona solicitante</h4>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-xs-4 col-md-4 col-sm-4 col-lg-4">
+                    <div class="form-group">
+                        <b>Nombre </b>
+                        <label title="Nombre"></label>
+                    </div>
+                </div>
+                <div class="col-xs-6 col-md-6 col-sm-6 col-lg-6">
+                    <div class="form-group">
+                        <b>Apellidos </b>
+                        <label title="Apellidos"></label>
+                    </div>
+                </div>
+                <div class="col-xs-2 col-md-2 col-sm-2 col-lg-2">
+                    <div class="form-group">
+                        <b>NIF </b>
+                        <label title="NIF"></label>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-xs-12 col-md-12 col-sm-12 col-lg-12">
+                    <div class="form-group">
+                        <b>Área/Departamento </b>
+                        <label title="Departamento"></label>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-xs-12 col-md-12 col-sm-12 col-lg-12">
+                    <h4>Persona a dar de alta</h4>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-xs-4 col-md-4 col-sm-4 col-lg-4">
+                    <div class="form-group">
+                        <b>Nombre </b>
+                        <label title="Nombre"></label>
+                    </div>
+                </div>
+                <div class="col-xs-6 col-md-6 col-sm-6 col-lg-6">
+                    <div class="form-group">
+                        <b>Apellidos </b>
+                        <label title="Apellidos"></label>
+                    </div>
+                </div>
+                <div class="col-xs-2 col-md-2 col-sm-2 col-lg-2">
+                    <div class="form-group">
+                        <b>NIF </b>
+                        <label title="NIF"></label>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-xs-12 col-md-12 col-sm-12 col-lg-12">
+                    <div class="form-group">
+                        <b>Área/Departamento </b>
+                        <label title="Departamento"></label>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-xs-12 col-md-12 col-sm-12 col-lg-12">
+                    <h4>Servicios</h4>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-xs-12 col-md-12 col-sm-12 col-lg-12">
+                    <div class="form-group pull-right">
+                        <button id="submit_new_user">Enviar</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script type="text/javascript">
+    $(document).ready(function() {
+        $(".js-example-basic-single").select2();
+    });
+</script>
