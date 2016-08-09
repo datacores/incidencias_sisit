@@ -13,11 +13,20 @@
 
 	ul.pagination li {display: inline;}
 
-	.pag_control {
-		color: black;
-		float: left;
-		padding: 8px 16px;
-		text-decoration: none;
+	li.activo, li.activo>a, li.activo>a.pag_control {
+		border-color: grey !important;
+		background-color: grey !important;
+		color: #fff !important;
+	}
+
+	ul.pagination li.active a, ul.pagination li a:hover {
+		border-color: grey !important;
+		background-color: grey !important;
+		color: #fff !important;
+	}
+
+	ul.pagination li a {
+		color: grey !important;
 	}
 </style>
 <div class="container-fluid">
