@@ -242,24 +242,24 @@
 			var obj = CORE.str_to_htmlObj(this.innerHTML);
 
 			if(!that.columnas_editables[key])
-				tpl += that.get_celda('celda', '<%='+that.ids_columnas[key]+'%>', key);
+				tpl += that.get_celda('celda', '<%='+that.ids_columnas[key]+'%>', key, this);
 			else {
 				switch(CORE.tipo(obj)){
 					case 'HTMLInputElement':
 						if(obj.type === 'checkbox')
-							tpl += that.get_celda('checkbox', that.ids_columnas[key], key);
+							tpl += that.get_celda('checkbox', that.ids_columnas[key], key, this);
 						break;
 					case 'HTMLSelectElement':
-						tpl += that.get_celda('select', [this.innerHTML,that.ids_columnas[key]], key);
+						tpl += that.get_celda('select', [this.innerHTML,that.ids_columnas[key]], key, this);
 						break;
 					case 'String':
-						tpl += that.get_celda('input', '<%='+that.ids_columnas[key]+'%>', key);
+						tpl += that.get_celda('input', '<%='+that.ids_columnas[key]+'%>', key, this);
 						break;
 					case 'HTMLDivElement':
-						tpl += that.get_celda('html', this.outerHTML , key);
+						tpl += that.get_celda('html', this.outerHTML , key, this);
 						break;
 					default:
-						tpl += that.get_celda('input', '<%='+that.ids_columnas[key]+'%>', key);
+						tpl += that.get_celda('input', '<%='+that.ids_columnas[key]+'%>', key, this);
 						break;
 				}
 			}
@@ -267,7 +267,6 @@
 
 		tpl += '</tr>';
 		this.tpl_registro = _.template(tpl);
-
 		// Quitamos el usado como molde
 		this.$tabla.find('tbody tr:nth-child(1)').remove();	
 	}
@@ -277,20 +276,22 @@
 	 * 	Por ahora solo admite tres tipos de celda: input, select y checkbox.
 	 * 	Si no es una de estas tres, devuelve una celda tipo input.
 	 */
-	Tabla.prototype.get_celda = function(tipo, val_celda, columna){
+	Tabla.prototype.get_celda = function(tipo, val_celda, columna, celda){
 
 		var val_celda = val_celda || '',
-			that = this;
+			estilo_celda = celda.getAttribute('style') || false,
+			that = this,
+			td = estilo_celda ? '<td style="'+estilo_celda+'">' : '<td>';
 
 		switch(tipo){
 			case 'celda':
-				return  '<td><span identificador="<%=_identificador%>" fila="<%=_fila_registro%>" columna="'+columna+'" style="width:100%">'+val_celda+'</span>';
+			return  td+'<span identificador="<%=_identificador%>" fila="<%=_fila_registro%>" columna="'+columna+'" style="width:100%">'+val_celda+'</span></td>';
 				break;
 			case 'input':
-				return  '<td><input identificador="<%=_identificador%>" fila="<%=_fila_registro%>" columna="'+columna+'" style="width:100%" value="'+val_celda+'"/></td>';
+				return  td+'<input identificador="<%=_identificador%>" fila="<%=_fila_registro%>" columna="'+columna+'" style="width:100%" value="'+val_celda+'"/></td>';
 				break;
 			case 'select':
-				var select = '<td><select identificador="<%=_identificador%>" fila="<%=_fila_registro%>" columna="'+columna+'" style="width:100%;">',
+				var select = td+'<select identificador="<%=_identificador%>" fila="<%=_fila_registro%>" columna="'+columna+'" style="width:100%;">',
 					v  = val_celda[1],
 					vo;
 
@@ -302,7 +303,7 @@
 				return select+'</select></td>';
 				break;
 			case 'checkbox':
-				return	'<td><input identificador="<%=_identificador%>" fila="<%=_fila_registro%>" columna="'+columna+'" type="checkbox" <% if('+val_celda+' == 1){ print("checked") } %> style="width: 100%;text-align: center; vertical-align: middle">';
+				return	td+'<input identificador="<%=_identificador%>" fila="<%=_fila_registro%>" columna="'+columna+'" type="checkbox" <% if('+val_celda+' == 1){ print("checked") } %> style="width: 100%;text-align: center; vertical-align: middle">';
 				break;
 			case 'html':
 				/*

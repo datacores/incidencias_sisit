@@ -4,6 +4,21 @@
 		word-break: break-all !important;
 		white-space: normal !important;
 	}
+
+	ul.pagination {
+		display: inline-block;
+		padding: 0;
+		margin: 0;
+	}
+
+	ul.pagination li {display: inline;}
+
+	.pag_control {
+		color: black;
+		float: left;
+		padding: 8px 16px;
+		text-decoration: none;
+	}
 </style>
 <div class="container-fluid">
 	<div id="main_row" class="row">
@@ -91,39 +106,6 @@
 							<th width="20%" data-editable="true">Información añadida</th>
 						</tr>
 						</thead>
-						<!--<tbody>
-						<% $.each (DATA.services, function () {
-
-						print ('<tr>\
-							<td>\
-								<div class="checkbox">\
-									<label><input type="checkbox">' + this.nombre + '</label>\
-								</div>\
-							</td>\
-							<td>\
-								<div class="checkbox">\
-									<label><input type="checkbox"></label>\
-								</div>\
-							</td>\
-							<td>\
-								<div class="checkbox">\
-									<label><input type="checkbox"></label>\
-								</div>\
-							</td>\
-							<td>\
-								<div class="checkbox">\
-									<label><input type="checkbox"></label>\
-								</div>\
-							</td>\
-							<td>\
-								<div class="checkbox">\
-									<label><input type="checkbox"></label>\
-								</div>\
-							</td>\
-							<td></td>\
-							</tr> ');
-						});%>
-						</tbody>-->
 						<tbody id="lista_services">
 							<tr>
 								<td style="word-wrap: break-word;word-break: break-all;white-space: normal;"></td>

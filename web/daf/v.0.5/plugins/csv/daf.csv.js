@@ -134,7 +134,7 @@
         while(a < this.datos.length){
             reg = "", b = 0;
             while(b < this.datos[a].length){
-                v = this.datos[a][b];//.replace('"', '""');
+                v = this.datos[a][b] ? this.datos[a][b].replace('"', '""') : "";
                 reg += '"'+v+'";';
                 b++;
             }
