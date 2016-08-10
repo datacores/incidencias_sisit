@@ -169,8 +169,11 @@ var processUser = function ($newUser) {
     $('#new_user_nif_label').text($newUser.user_nif);
     $('#new_user_dpt_label').text($newUser.user_dpt);
 
+     console.log($newUser.user_services);
     $($newUser.user_services).each(function() {
-        $('#new_user_services_label').append(this.name + '-' + this.action + '<br>');
+        $('#new_user_services_label').append(
+            'Servicio: ' + this.name + ' Accion: ' + this.action + ' Vigencia: ' + this.life + ' Info: ' + this.info +'<br>'
+        );
     });
 };
 
@@ -192,6 +195,9 @@ function user_new_controller() {
         var id      = ev.currentTarget.getAttribute('data-id');
         var col     = $(this).parent().index();
         var action;
+        var life    = $(this).parent().siblings().eq(4).find('textarea').val();
+        var info    = $(this).parent().siblings().eq(5).find('textarea').val();
+
 
         switch (col) {
             case 1:
@@ -209,9 +215,13 @@ function user_new_controller() {
         }
 
         services.push({
-            name: id,
-            action: action
+            name:   id,
+            action: action,
+            life:   life,
+            info:   info
         });
+
+        console.log(services);
     });
 
     tabla_services.set_cambia_filtro(function ($input) {
