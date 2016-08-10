@@ -198,30 +198,36 @@ function user_new_controller() {
         var life    = $(this).parent().siblings().eq(4).find('textarea').val();
         var info    = $(this).parent().siblings().eq(5).find('textarea').val();
 
+        $(this).parent().siblings().find('.check').prop('checked', false);
 
-        switch (col) {
-            case 1:
-                action = 'alta';
-                break;
-            case 2:
-                action = 'baja';
-                break;
-            case 3:
-                action = 'modificacion';
-                break;
-            case 4:
-                action = 'renovacion';
-                break;
-        }
-
-        services.push({
-            name:   id,
-            action: action,
-            life:   life,
-            info:   info
+        services = jQuery.grep(services, function(value) {
+            return value.name != id;
         });
 
-        console.log(services);
+        if ($(this).find('.check').is(':checked')) {
+            switch (col) {
+                case 1:
+                    action = 'alta';
+                    break;
+                case 2:
+                    action = 'baja';
+                    break;
+                case 3:
+                    action = 'modificacion';
+                    break;
+                case 4:
+                    action = 'renovacion';
+                    break;
+            }
+
+            services.push({
+                name:   id,
+                action: action,
+                life:   life,
+                info:   info
+            });
+        }
+
     });
 
     tabla_services.set_cambia_filtro(function ($input) {
