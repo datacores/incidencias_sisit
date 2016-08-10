@@ -73,6 +73,21 @@ var $processTicket = function ($newTicket) {
         $('#inventory_number_label').text($newTicket.inventory_number);
 
         $user = _.findWhere(DATA.ldapUsers, { usuario_id: $newTicket.user});
+
+        $.ajax({
+            url:        'http://pincap.ayuncordoba.org/A08/item/' + $newTicket.inventory_number,
+            dataType:   'json',
+            method:     'GET',
+            headers:    {
+                'Access-Control-Allow-Origin':      '*',
+                'Access-Control-Allow-Methods':     'GET, POST, OPTIONS, PUT, PATCH, DELETE',
+                'Access-Control-Allow-Headers':     'X-Requested-With,content-type',
+                'Access-Control-Allow-Credentials': true
+            }
+        }).done(function(rsp) {
+            console.log(rsp);
+        });
+
         $('#issuedUser_name_label').text($user.displayname);
         $('#issuedUser_login_label').text($user.usuario_id);
     }
@@ -147,21 +162,16 @@ var getUser = function(cv, services) {
 
 var processUser = function ($newUser) {
 
+
     view.user_preConfirm.render();
+    $('#new_user_name_label').text($newUser.user_name);
+    $('#new_user_surname_label').text($newUser.user_surname);
+    $('#new_user_nif_label').text($newUser.user_nif);
+    $('#new_user_dpt_label').text($newUser.user_dpt);
 
-    var $cv = $('#foreground_newUser_preConfirm');
-    $cv.find('#new_user_name_label').val($newUser.user_name);
-    $cv.find('#new_user_surname_label').val($newUser.user_surname);
-    $cv.find('#new_user_nif_label').val($newUser.user_nif);
-    $cv.find('#new_user_dpt_label').val($newUser.user_dpt);
-
-    console.log($newUser);
-
-    // $newUser.user_services.each(function() {
-    //     $cv.find('#new_user_services_label').append(
-    //         $(this).name + '-' + $(this).action + '<br>'
-    //     );
-    // });
+    $($newUser.user_services).each(function() {
+        $('#new_user_services_label').append(this.name + '-' + this.action + '<br>');
+    });
 };
 
 function user_new_controller() {
@@ -233,11 +243,9 @@ function user_new_controller() {
         paginador_services.refrescar();
     }
 
-    cv.find('#submit_new_user').off('click');
-    cv.find('#submit_new_user').on('click', function(ev) {
+    cv.find('#submit_preConfirm').off('click');
+    cv.find('#submit_preConfirm').on('click', function(ev) {
         var $newUser = getUser(cv, services);
-        console.log(services);
         processUser($newUser);
-        view.user_preConfirm.render();
     });
 }
