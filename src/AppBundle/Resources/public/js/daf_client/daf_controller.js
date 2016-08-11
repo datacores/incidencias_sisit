@@ -212,14 +212,14 @@ function ticket_preConfirm_controller(){
 function user_new_controller() {
 
     routing.push('user_new');
-    var cv                             = $('#foreground_newUser'),
-        tabla_services                 = new Tabla ('services_table', true, true),
-        filtro_columnas_services       = new Filtro,
-        filtro_services                = new Filtro;
 
-    var paginador_services = new Paginador('#controles_listado_services', true, DATA.services, function (datos_paginados) {
-        tabla_services.carga_registros(datos_paginados, 'id', function () {
-        });
+    var cv                             = $('#foreground_newUser'),
+        services_table                 = new Tabla ('services_table', true, true),
+        services_column_filter         = new Filtro,
+        services_filter                = new Filtro;
+
+    var services_pagination = new Paginador('#controles_listado_services', true, DATA.services, function (paginated_data) {
+        services_table.carga_registros(paginated_data, 'id', function () {});
     });
 
     services = [];
@@ -306,33 +306,33 @@ function user_new_controller() {
         }
     });
 
-    tabla_services.set_cambia_filtro(function ($input) {
+    services_table.set_cambia_filtro(function ($input) {
         var _id = $input.attr('data-filtro-id'),
             valor = $input.val();
 
-        filtro_columnas_services.add_condicion(_id, "%"+valor, _id);
-        refrescar_paginacion_services();
+        services_column_filter.add_condicion(_id, "%"+valor, _id);
+        services_pagination_refresh();
     });
 
-    tabla_services.set_reordenar(function(col) {
+    services_table.set_reordenar(function(col) {
         DATA.services = (this.orden) ? _.sortBy(DATA.services, col).reverse() : _.sortBy(DATA.services, col);
-        refrescar_paginacion_services();
+        services_pagination_refresh();
     });
 
     cv.find('#buscador_services').off('change');
     cv.find('#buscador_services').on('keyup', function(ev) {
         if(espera) clearTimeout(espera);
         var espera = setTimeout(function(){
-            filtro_services.add_condicion('*', "%"+ev.currentTarget.value, 'filtro_services');
-            refrescar_paginacion_services();
+            services_filter.add_condicion('*', "%"+ev.currentTarget.value, 'services_filter');
+            services_pagination_refresh();
         }, 1000);
     });
 
-    function refrescar_paginacion_services() {
-        paginador_services.set_datos(
-            app.aplicar_filtros([filtro_columnas_services, filtro_services], DATA.services)
+    function services_pagination_refresh() {
+        services_pagination.set_datos(
+            app.aplicar_filtros([services_column_filter, services_filter], DATA.services)
         );
-        paginador_services.refrescar();
+        services_pagination.refrescar();
     }
 
     cv.find('#submit_preConfirm').off('click');
