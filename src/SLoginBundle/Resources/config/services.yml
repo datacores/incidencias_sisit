@@ -1,5 +1,5 @@
 parameters:
-    sp.base.url: http://127.0.0.1:8000
+    sp.base.url: http://pincap.ayuncordoba.org
     idp.base.url: http://idprovidersso.ayuncordoba.org
     slogin.authz.settings:
         #If 'strict' is True, then the PHP Toolkit will reject unsignedhttps://www.google.es/?gws_rd=ssl
