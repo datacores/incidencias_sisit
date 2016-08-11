@@ -1,6 +1,6 @@
 <?php
 
-namespace Pincap\SLoginBundle;
+namespace SLoginBundle;
 
 use Symfony\Component\HttpKernel\Bundle\Bundle;
 

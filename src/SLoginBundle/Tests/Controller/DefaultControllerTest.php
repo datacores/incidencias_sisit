@@ -1,6 +1,6 @@
 <?php
 
-namespace Pincap\SLoginBundle\Tests\Controller;
+namespace SLoginBundle\Tests\Controller;
 
 use Symfony\Bundle\FrameworkBundle\Test\WebTestCase;
 

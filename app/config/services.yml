@@ -4,6 +4,9 @@ parameters:
 #    parameter_name: value
 
 services:
-#    service_name:
-#        class: AppBundle\Directory\ClassName
-#        arguments: ["@another_service_name", "plain_value", "%parameter_name%"]
+    check.authorization:
+        class: Services\AuthFactory
+        arguments:
+            - [request]
+            - [id_app]
+            - [id_op_acceso]

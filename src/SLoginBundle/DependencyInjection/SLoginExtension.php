@@ -1,6 +1,6 @@
 <?php
 
-namespace Pincap\SLoginBundle\DependencyInjection;
+namespace SLoginBundle\DependencyInjection;
 
 use Symfony\Component\DependencyInjection\ContainerBuilder;
 use Symfony\Component\Config\FileLocator;
