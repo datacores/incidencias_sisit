@@ -168,8 +168,6 @@ var processUser = function ($newUser) {
     $('#new_user_surname_label').text($newUser.user_surname);
     $('#new_user_nif_label').text($newUser.user_nif);
     $('#new_user_dpt_label').text($newUser.user_dpt);
-
-     console.log($newUser.user_services);
     $($newUser.user_services).each(function() {
         $('#new_user_services_label').append(
             'Servicio: ' + this.name + ' Accion: ' + this.action + ' Vigencia: ' + this.life + ' Info: ' + this.info +'<br>'
@@ -227,7 +225,50 @@ function user_new_controller() {
                 info:   info
             });
         }
+    });
 
+    cv.find('.textarea1').on('change', function(ev) {
+
+        var id      = ev.currentTarget.getAttribute('data-id');
+        var life    = $(this).find('textarea').val();
+
+        if (services.length > 0) {
+            var service = _.findWhere(services, { name: id});
+
+            services = jQuery.grep(services, function(value) {
+                return value.name != id;
+            });
+
+            if (service) {
+                services.push({
+                    name:   id,
+                    action: service.action,
+                    life:   life,
+                    info:   service.info
+                });
+            }
+        }
+    });
+
+    cv.find('.textarea2').on('change', function(ev) {
+        var id      = ev.currentTarget.getAttribute('data-id');
+        var info    = $(this).find('textarea').val();
+        if (services.length > 0) {
+            var service = _.findWhere(services, { name: id});
+
+            services = jQuery.grep(services, function(value) {
+                return value.name != id;
+            });
+
+            if (service) {
+                services.push({
+                    name:   id,
+                    action: service.action,
+                    life:   service.life,
+                    info:   info
+                });
+            }
+        }
     });
 
     tabla_services.set_cambia_filtro(function ($input) {
