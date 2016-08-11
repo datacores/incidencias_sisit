@@ -1,45 +1,14 @@
-function upper_menu_controller() {
-    var $container = $('#upper_menu');
+/******************************
+ *
+ *       GETTERS & SETTERS
+ *
+ *************************/
 
-    $container.find('#view_list_informationAssets').on('click', function() {
-        view.informationAssets_list.render();
-    });
-
-    $container.find('#home').on('click', function() {
-        view.index.render();
-    });
-
-    $container.find('#ticket_management').on('click', function () {
-        view.ticket_new.render();
-    });
-}
-
-function index_controller() {
-    var $cv = $('#index');
-
-    $cv.find('#ticket_management').on('click', function () {
-        view.ticket_new.render();
-    });
-
-    $cv.find('#user_management').on('click', function () {
-        view.user_new.render();
-    });
-}
-
-var $setMaterial = function($material_needed1, $material_needed2) {
-    if ($material_needed1) {
-        $('#material_needed_label').text("Tinta/Toner de impresora");
-    }
-
-    if ($material_needed2) {
-        var $val = "";
-        if ($material_needed1) {
-            $val = "Tinta/Toner de impresora, ";
-        }
-        $('#material_needed_label').text($val+"Material informático (cable, ratón, etc)");
-    }
-};
-
+/**
+ * Devuelve la información del ticket antes de preprocesarlo.
+ * @param $cv
+ * @returns {{abstract: *, description: (*|string), issuedUser: *, requestUser: *, impactLevel: *, criticalLevel: *, inventory_number: *, commonError: *, user: *}}
+ */
 var $getTicket = function($cv) {
     return {
         abstract:           $cv.find('#abstract').val(),
@@ -50,48 +19,164 @@ var $getTicket = function($cv) {
         criticalLevel:      $cv.find('#criticalLevel option:selected').text(),
         inventory_number:   $cv.find('#inventory_number option:selected').text(),
         commonError:        $cv.find('#issue_1').is(':checked') || $cv.find('#issue_2').is(':checked') ||
-                            $cv.find('#issue_3').is(':checked'),
+        $cv.find('#issue_3').is(':checked'),
         user:               $cv.find('#issuedUser').val()
     };
 };
 
+/**
+ *
+ * @param cv
+ * @param services
+ * @returns {{user_name: *, user_surname: *, user_nif: *, user_dpt: *, user_services: *}}
+ */
+var getUser = function(cv, services) {
+    return {
+        user_name:      cv.find('#new_user_name').val(),
+        user_surname:   cv.find('#new_user_surname').val(),
+        user_nif:       cv.find('#new_user_nif').val(),
+        user_dpt:       cv.find('#new_user_dpt').val(),
+        user_services:  services
+    };
+};
+
+/******************************
+ *
+ *       CONTROLADORES QUE PREPROCESAN
+ *       DATOS DE PLANTILLAS
+ *
+ *************************/
+
+/**
+ *
+ * @param $newTicket
+ */
+var $setNewTicket = function ($newTicket) {
+    $('#abstract_label').text($newTicket.abstract);
+    $('#description_label').append($.parseHTML($newTicket.description));
+    $('#issuedUser_label').text($newTicket.issuedUser);
+    $('#requestUser_label').text($newTicket.requestUser);
+    $('#criticalLevel_label').text($newTicket.criticalLevel);
+    $('#impactLevel_label').text($newTicket.impactLevel);
+    $('#inventory_number_label').text($newTicket.inventory_number);
+};
+
+/**
+ *
+ * @param $newTicket
+ */
 var $processTicket = function ($newTicket) {
     if ($newTicket.commonError){
         view.ticket_managingError.render();
     } else {
         view.ticket_preConfirm.render();
-        $('#abstract_label').text($newTicket.abstract);
-        $('#description_label').append($.parseHTML($newTicket.description));
-        $('#issuedUser_label').text($newTicket.issuedUser);
-        $('#requestUser_label').text($newTicket.requestUser);
-        $('#criticalLevel_label').text($newTicket.criticalLevel);
-        $('#impactLevel_label').text($newTicket.impactLevel);
-
-        $setMaterial($newTicket.material_needed_1, $newTicket.material_needed_2);
-
-        $('#material_details_label').append($.parseHTML($newTicket.material_details));
-        $('#inventory_number_label').text($newTicket.inventory_number);
+        $setNewTicket($newTicket);
 
         $user = _.findWhere(DATA.ldapUsers, { usuario_id: $newTicket.user});
-
-        $.ajax({
-            url:        'http://pincap.ayuncordoba.org/A08/item/' + $newTicket.inventory_number,
-            dataType:   'json',
-            method:     'GET',
-            headers:    {
-                'Access-Control-Allow-Origin':      '*',
-                'Access-Control-Allow-Methods':     'GET, POST, OPTIONS, PUT, PATCH, DELETE',
-                'Access-Control-Allow-Headers':     'X-Requested-With,content-type',
-                'Access-Control-Allow-Credentials': true
-            }
-        }).done(function(rsp) {
-            console.log(rsp);
-        });
-
         $('#issuedUser_name_label').text($user.displayname);
         $('#issuedUser_login_label').text($user.usuario_id);
+
+        // $.ajax({
+        //     url:        'http://pincap.ayuncordoba.org/A08/item/' + $newTicket.inventory_number,
+        //     dataType:   'json',
+        //     method:     'GET',
+        //     headers:    {
+        //         'Access-Control-Allow-Origin':      '*',
+        //         'Access-Control-Allow-Methods':     'GET, POST, OPTIONS, PUT, PATCH, DELETE',
+        //         'Access-Control-Allow-Headers':     'X-Requested-With,content-type',
+        //         'Access-Control-Allow-Credentials': true
+        //     }
+        // }).done(function(rsp) {
+        //     console.log(rsp);
+        // });
     }
 };
+
+/**
+ *
+ * @param $newUser
+ */
+var processUser = function ($newUser) {
+
+    view.user_preConfirm.render();
+    $('#new_user_name_label').text($newUser.user_name);
+    $('#new_user_surname_label').text($newUser.user_surname);
+    $('#new_user_nif_label').text($newUser.user_nif);
+    $('#new_user_dpt_label').text($newUser.user_dpt);
+    $($newUser.user_services).each(function() {
+        $('#new_user_services_label').append(
+            'Servicio: ' + this.name + ' Accion: ' + this.action + ' Vigencia: ' + this.life + ' Info: ' + this.info +'<br>'
+        );
+    });
+};
+
+/****************************
+ *
+ *          CONTROLADORES
+ *            DE EVENTOS
+ *          DE PLANTILLAS
+ *
+ ***************************/
+
+function ticket_managingError_controller(){}
+function user_preConfirm_controller(){}
+
+/**
+ * Gestiona eventos de la plantilla 'upper_menu.tpl.html'
+ * --------
+ * It handles events from 'upper_menu.tpl.html' template
+ */
+function upper_menu_controller() {
+
+    var $container = $('#upper_menu');
+
+    $container.find('#view_list_informationAssets').on('click', function() {
+        view.informationAssets_list.render();
+    });
+    $container.find('#home').on('click', function() {
+        view.index.render();
+    });
+    $container.find('#ticket_management').on('click', function () {
+        view.ticket_new.render();
+    });
+}
+
+/**
+ * Gestiona eventos de la plantilla 'index.tpl.html'
+ * --------
+ * It handles events from 'index.tpl.html' template
+ */
+function index_controller() {
+
+    var $cv = $('#index');
+
+    $cv.find('#ticket_management').on('click', function () {
+        view.ticket_new.render();
+    });
+    $cv.find('#user_management').on('click', function () {
+        view.user_new.render();
+    });
+}
+
+function ticket_new_controller() {
+
+    routing.push('ticket_new');
+    var $cv = $('#foreground');
+    $cv.find('#submit_new_ticket').off('click');
+    $cv.find('#submit_new_ticket').on('click', function() {
+        var $newTicket = $getTicket($cv);
+        $processTicket($newTicket);
+    });
+
+    $cv.find('#differentUser').off('click');
+    $cv.find('#differentUser').on('click', function() {
+        if ($('#differentUser').is(':checked')){
+            $('#issuedUser').parent().show();
+        } else {
+            $('#issuedUser').parent().hide();
+        }
+    });
+}
 
 function ticket_preConfirm_controller(){
     routing.push('ticket_preConfirm');
@@ -124,57 +209,6 @@ function ticket_preConfirm_controller(){
     set_action_back($cv);
 }
 
-function ticket_managingError_controller(){}
-
-function user_preConfirm_controller(){
-
-}
-
-function ticket_new_controller() {
-    routing.push('ticket_new');
-    var $cv = $('#foreground');
-    $cv.find('#submit_new_ticket').off('click');
-    $cv.find('#submit_new_ticket').on('click', function() {
-        var $newTicket = $getTicket($cv);
-        $processTicket($newTicket);
-    });
-
-
-    $cv.find('#differentUser').off('click');
-    $cv.find('#differentUser').on('click', function() {
-        if ($('#differentUser').is(':checked')){
-            $('#issuedUser').parent().show();
-        } else {
-            $('#issuedUser').parent().hide();
-        }
-    });
-}
-
-var getUser = function(cv, services) {
-    return {
-        user_name:      cv.find('#new_user_name').val(),
-        user_surname:   cv.find('#new_user_surname').val(),
-        user_nif:       cv.find('#new_user_nif').val(),
-        user_dpt:       cv.find('#new_user_dpt').val(),
-        user_services:  services
-    };
-};
-
-var processUser = function ($newUser) {
-
-
-    view.user_preConfirm.render();
-    $('#new_user_name_label').text($newUser.user_name);
-    $('#new_user_surname_label').text($newUser.user_surname);
-    $('#new_user_nif_label').text($newUser.user_nif);
-    $('#new_user_dpt_label').text($newUser.user_dpt);
-    $($newUser.user_services).each(function() {
-        $('#new_user_services_label').append(
-            'Servicio: ' + this.name + ' Accion: ' + this.action + ' Vigencia: ' + this.life + ' Info: ' + this.info +'<br>'
-        );
-    });
-};
-
 function user_new_controller() {
 
     routing.push('user_new');
@@ -189,6 +223,7 @@ function user_new_controller() {
     });
 
     services = [];
+
     cv.find('.checkbox').on('click', function(ev) {
         var id      = ev.currentTarget.getAttribute('data-id');
         var col     = $(this).parent().index();
