@@ -105,7 +105,7 @@ var processUser = function ($newUser) {
     $('#new_user_dpt_label').text($newUser.user_dpt);
     $($newUser.user_services).each(function() {
         $('#new_user_services_label').append(
-            this.action + " en " + this.name + " | " + "Vigencia: " + this.life + ", Info: " + + this.info +'<br>'
+            this.action + " en " + this.name + " | " + "Vigencia: " + this.life + ", Info: " + this.info +'<br>'
         );
     });
 };
@@ -119,7 +119,10 @@ var processUser = function ($newUser) {
  ***************************/
 
 function ticket_managingError_controller(){}
-function user_preConfirm_controller(){}
+function user_preConfirm_controller(){
+    var $cv = $('#foreground_newUser_preConfirm');
+    set_action_back($cv);
+}
 
 /**
  * Gestiona eventos de la plantilla 'upper_menu.tpl.html'
