@@ -142,6 +142,9 @@ function upper_menu_controller() {
     $container.find('#ticket_management').on('click', function () {
         view.ticket_new.render();
     });
+    $container.find('#user_management').on('click', function () {
+        view.user_new.render();
+    });
 }
 
 /**
