@@ -61,10 +61,10 @@
     margin-top: 10%;
 }
 
-/*body {*/
-    /*margin-left: 10%;*/
-    /*margin-right: 10%;*/
-/*}*/
+body {
+    margin-left: 5px;
+    margin-right: 5px;
+}
 
 #leftSideBar {
     width: 25%;
@@ -86,4 +86,11 @@
 ul.pagination {
     height: 40px;
     /*width: 210px;*/
+}
+
+h4.texto_header {
+    font-weight: bold;
+    color: #cccccc;
+    float: right;
+    margin: 15px 0 0 16px;
 }

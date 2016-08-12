@@ -105,7 +105,7 @@ var processUser = function ($newUser) {
     $('#new_user_dpt_label').text($newUser.user_dpt);
     $($newUser.user_services).each(function() {
         $('#new_user_services_label').append(
-            'Servicio: ' + this.name + ' Accion: ' + this.action + ' Vigencia: ' + this.life + ' Info: ' + this.info +'<br>'
+            this.action + " en " + this.name + " | " + "Vigencia: " + this.life + ", Info: " + + this.info +'<br>'
         );
     });
 };

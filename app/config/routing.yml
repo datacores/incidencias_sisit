@@ -1,3 +1,7 @@
 app:
     resource: "@AppBundle/Controller/"
     type:     annotation
+
+slogin:
+    resource: "@SLoginBundle/Controller/"
+    type:     annotation
