@@ -26,6 +26,19 @@ class HardwareController extends Controller
     }
 
     /**
+     * @Route("/machines/{id}")
+     * @return JsonResponse
+     */
+    public function getMachineInfoAction($id)
+    {
+        $conn = $this->get('doctrine.dbal.pincap_connection');
+        $machines = $conn->fetchAll(
+            'SELECT * FROM a08_iteminformatico where codigo_item = '.$id
+        );
+        return new JsonResponse($machines);
+    }
+
+    /**
      * @Route("/services")
      * @return JsonResponse
      */

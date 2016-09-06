@@ -75,20 +75,6 @@ var $processTicket = function ($newTicket) {
         $user = _.findWhere(DATA.ldapUsers, { usuario_id: $newTicket.user});
         $('#issuedUser_name_label').text($user.displayname);
         $('#issuedUser_login_label').text($user.usuario_id);
-
-        // $.ajax({
-        //     url:        'http://pincap.ayuncordoba.org/A08/item/' + $newTicket.inventory_number,
-        //     dataType:   'json',
-        //     method:     'GET',
-        //     headers:    {
-        //         'Access-Control-Allow-Origin':      '*',
-        //         'Access-Control-Allow-Methods':     'GET, POST, OPTIONS, PUT, PATCH, DELETE',
-        //         'Access-Control-Allow-Headers':     'X-Requested-With,content-type',
-        //         'Access-Control-Allow-Credentials': true
-        //     }
-        // }).done(function(rsp) {
-        //     console.log(rsp);
-        // });
     }
 };
 
@@ -164,12 +150,19 @@ function index_controller() {
     });
 }
 
+function writeHardwareInfo(hardware, cv) {
+    var $machineInfo = cv.find('machineInfo');
+    $($machineInfo+'.row:nth-child(1) .col:nth-child(2)').val(hardware.cod_item);
+    $($machineInfo+'.row:nth-child(1) .col:nth-child(2)').val(hardware.n_serie);
+}
+
 function ticket_new_controller() {
 
     routing.push('ticket_new');
     var $cv = $('#foreground');
     $cv.find('#submit_new_ticket').off('click');
     $cv.find('#submit_new_ticket').on('click', function() {
+        alert("askcbsa");
         var $newTicket = $getTicket($cv);
         $processTicket($newTicket);
     });
@@ -187,6 +180,16 @@ function ticket_new_controller() {
 function ticket_preConfirm_controller(){
     routing.push('ticket_preConfirm');
     var $cv = $('#foreground_preConfirm');
+
+    $.ajax({
+        url:        "/machines/'"+ $newTicket.inventory_number.replace('-','') + "'",
+        dataType:   'json',
+        method:     'GET'
+    }).done(function(rsp) {
+        $.each(rsp, function () {
+            console.log($cv,this);
+        });
+    });
 
     $cv.find('#notification').off('click');
     $cv.find('#notification').on('click', function() {

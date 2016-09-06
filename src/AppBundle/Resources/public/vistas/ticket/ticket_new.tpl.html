@@ -1,3 +1,8 @@
+<style>
+	#cke_1_contents {
+		height: 207px !important;
+	}
+</style>
 <div class="container-fluid">
 	<div id="main_row" class="row">
 		<div id="leftSideBar" class="col-xs-3 col-md-3 col-sm-3 col-lg-3">
@@ -30,83 +35,93 @@
 				</div>
 			</div>
 			<div class="row">
-				<div class="col-xs-12 col-md-12 col-sm-12 col-lg-12">
-					<div class="form-group">
-                        <b>Resumen de la incidencia: *</b>
-                        <input id="abstract" title="Resumen de la incidencia" class="form-control"/>
-                    </div>
+				<div class="col-xs-6 col-md-6 col-sm-6 col-lg-6">
+					<div class="row">
+						<div class="col-xs-12 col-md-12 col-sm-12 col-lg-12">
+							<div class="form-group">
+								<b>Resumen de la incidencia: *</b>
+								<input id="abstract" title="Resumen de la incidencia" class="form-control"/>
+							</div>
+						</div>
+					</div>
+				</div>
+				<div class="row">
+					<div class="col-xs-6 col-md-6 col-sm-6 col-lg-6">
+						<b>¿El usuario afectado es distinto del que hace la solicitud?</b>
+						<div class="checkbox">
+							<label><input type="checkbox" id="differentUser"> Sí</label>
+						</div>
+						<div class="col-xs-12 col-md-12 col-sm-12 col-lg-12">
+							<div class="form-group" style="display: none">
+								<b>Usuario afectado: </b><br>
+								<select id="issuedUser" title ="Usuario afectado" style="width: 100%" class="js-example-basic-single form-control">
+									<option value=null></option>
+									<% $.each (DATA.ldapUsers, function () {
+									print ('<option value=' + this.usuario_id + '>' + this.usuario_id + " - " + this.displayname + '</option>');
+									});%>
+								</select>
+							</div>
+						</div>
+					</div>
 				</div>
 			</div>
-			<div class="row">
-				<div class="col-xs-12 col-md-12 col-sm-12 col-lg-12">
-					<div class="form-group">
-                        <b>Descripción detallada: *</b><br>
-                        <small>Por favor, trate de ser lo más específico posible al describir su problema. Por
-                        ejemplo, asegúrese de incluir el número de inventario si su máquina está afectada.</small>
-                        <textarea id="description" title="Descripción del problema" class="form-control"></textarea>
-						<script>
-							CKEDITOR.replace('description');
-						</script>
-                    </div>
-				</div>
-			</div>
-
 			<div class="row">
 				<div class="col-xs-6 col-md-6 col-sm-6 col-lg-6">
-					<b>¿El usuario afectado es distinto del que hace la solicitud?</b>
-					<div class="checkbox">
-						<label><input type="checkbox" id="differentUser"> Sí</label>
+					<div class="row">
+						<div class="col-xs-12 col-md-12 col-sm-12 col-lg-12">
+							<div class="form-group">
+								<b>Descripción detallada: *</b><br>
+								<small>Por favor, trate de ser lo más específico posible al describir su problema. Por
+								ejemplo, asegúrese de incluir el número de inventario si su máquina está afectada.</small>
+								<textarea id="description" title="Descripción del problema" class="form-control"></textarea>
+								<script>
+									CKEDITOR.replace('description');
+								</script>
+							</div>
+						</div>
 					</div>
 				</div>
 				<div class="col-xs-6 col-md-6 col-sm-6 col-lg-6">
-					<b>Impacto de la incidencia </b>
-					<select title="Nivel de impacto" id="impactLevel" class="form-control js-example-basic-single">
-						<% $.each (DATA.impact, function () {
-						print ('<option value=' + this.id + '>' + this.impacto + '</option>');
-						});%>
-					</select>
-				</div>
-			</div>
-			<div class="row">
-				<div class="col-xs-6 col-md-6 col-sm-6 col-lg-6">
-					<div class="form-group" style="display: none">
-						<b>Usuario afectado: </b><br>
-						<select id="issuedUser" title ="Usuario afectado" style="width: 100%" class="js-example-basic-single form-control">
-							<option value=null></option>
-							<% $.each (DATA.ldapUsers, function () {
-							print ('<option value=' + this.usuario_id + '>' + this.usuario_id + " - " + this.displayname + '</option>');
-							});%>
-						</select>
-					</div>
-				</div>
-				<div class="col-xs-6 col-md-6 col-sm-6 col-lg-6">
-					<b>Criticidad de la incidencia </b>
-					<select title="Nivel de criticidad" id="criticalLevel" class="form-control js-example-basic-single">
-						<% $.each (DATA.criticality, function () {
-						print ('<option value=' + this.id + '>' + this.criticidad + '</option>');
-						});%>
-					</select>
-				</div>
-			</div>
-
-			<div class="row">
-				<div class="col-xs-6 col-md-6 col-sm-6 col-lg-6">
-					<div class="form-group">
-		      			<b>¿Hay una máquina afectada?</b> <br>
-		  				<small>Número de inventario de la máquina afectada</small>
-						<select id="inventory_number" title="Número de inventario de la máquina" class="js-example-basic-single form-control">
-							<% $.each (DATA.machines, function () {
-								print ('<option>' + this.ninventario + '</option>');
+					<div class="row">
+						<div class="col-xs-12 col-md-12 col-sm-12 col-lg-12">
+							<b>Impacto de la incidencia </b>
+							<select title="Nivel de impacto" id="impactLevel" class="form-control js-example-basic-single">
+								<% $.each (DATA.impact, function () {
+								print ('<option value=' + this.id + '>' + this.impacto + '</option>');
 								});%>
-						</select>
+							</select>
+						</div>
 					</div>
-				</div>
-				<div class="col-xs-6 col-md-6 col-sm-6 col-lg-6">
-					<div class="form-group">
-                        <b>Incluir Adjunto * </b> <br>
-                        <small>Adjunte fichero</small>
-                        <input type="file" class="form-control"/>
-                    </div>
+					<div class="row">
+						<div class="col-xs-12 col-md-12 col-sm-12 col-lg-12">
+							<b>Criticidad de la incidencia </b>
+							<select title="Nivel de criticidad" id="criticalLevel" class="form-control js-example-basic-single">
+								<% $.each (DATA.criticality, function () {
+								print ('<option value=' + this.id + '>' + this.criticidad + '</option>');
+								});%>
+							</select>
+						</div>
+					</div>
+					<div class="row">
+						<div class="col-xs-12 col-md-12 col-sm-12 col-lg-12">
+							<div class="form-group">
+								<b>¿Hay una máquina afectada?</b> <br>
+								<small>Número de inventario de la máquina afectada</small>
+								<select id="inventory_number" title="Número de inventario de la máquina" class="js-example-basic-single form-control">
+									<% $.each (DATA.machines, function () {
+									print ('<option>' + this.ninventario + '</option>');
+									});%>
+								</select>
+							</div>
+						</div>
+						<div class="col-xs-12 col-md-12 col-sm-12 col-lg-12">
+							<div class="form-group">
+								<b>Incluir Adjunto * </b> <br>
+								<small>Adjunte fichero</small>
+								<input type="file" class="form-control"/>
+							</div>
+						</div>
+					</div>
 				</div>
 			</div>
 
