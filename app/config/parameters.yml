@@ -8,5 +8,11 @@ parameters:
     mailer_transport: smtp
     mailer_host: 127.0.0.1
     mailer_user: juanto1990@gmail.com
-    mailer_password: SAGEMSG341i
+    mailer_password:
     secret: ThisTokenIsNotSoSecretChangeIt
+
+    pincap_host: 10.80.1.31
+    pincap_port: 3306
+    pincap_name: MSAccessPHP
+    pincap_user: MSAccessPHP
+    pincap_password: cpdcpd
