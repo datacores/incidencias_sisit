@@ -175,6 +175,8 @@ function ticket_new_controller() {
             $('#issuedUser').parent().hide();
         }
     });
+
+    $("#cke_1_contents").css('height','207px');
 }
 
 function ticket_preConfirm_controller(){
