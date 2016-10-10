@@ -3,8 +3,9 @@ namespace AppBundle\Controller\API;
 
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Symfony\Component\HttpFoundation\JsonResponse;
+use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 
-class LdapController
+class LdapController extends Controller
 {
     private $users;
     private $connection;
@@ -26,7 +27,7 @@ class LdapController
      */
     public function get_users()
     {
-        $this->connect("consultaldap", "Consulta#2016@");
+        $this->connect($this->getParameter('ldap_user'), $this->getParameter('ldap_password'));
         if($this->connection) {
             $dn = "OU=AYUNCORDOBA,DC=ayuncordoba,DC=org";
             $filtro = "(|(displayname=*))";

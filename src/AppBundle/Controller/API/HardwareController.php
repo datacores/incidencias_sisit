@@ -46,7 +46,7 @@ class HardwareController extends Controller
     {
         $conn = $this->get('database_connection');
         $services = $conn->fetchAll(
-            'SELECT nombre FROM sisit.net_servicios where final = 1 and nombre != "";'
+            'SELECT nombre FROM sisit.net_servicios where final = 1 and nombre != "" ORDER BY nombre;'
         );
         return new JsonResponse($services);
     }

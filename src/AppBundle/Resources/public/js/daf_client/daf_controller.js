@@ -162,7 +162,6 @@ function ticket_new_controller() {
     var $cv = $('#foreground');
     $cv.find('#submit_new_ticket').off('click');
     $cv.find('#submit_new_ticket').on('click', function() {
-        alert("askcbsa");
         var $newTicket = $getTicket($cv);
         $processTicket($newTicket);
     });
@@ -177,12 +176,13 @@ function ticket_new_controller() {
     });
 }
 
-function ticket_preConfirm_controller(){
+function ticket_preConfirm_controller() {
     routing.push('ticket_preConfirm');
     var $cv = $('#foreground_preConfirm');
+    var newTicket = $getTicket($cv);
 
     $.ajax({
-        url:        "/machines/'"+ $newTicket.inventory_number.replace('-','') + "'",
+        url:        "/machines/'"+ newTicket.inventory_number.replace('-','') + "'",
         dataType:   'json',
         method:     'GET'
     }).done(function(rsp) {
