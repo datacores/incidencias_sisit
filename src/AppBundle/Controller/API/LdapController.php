@@ -28,7 +28,7 @@ class LdapController extends Controller
     public function get_users()
     {
         $this->connect($this->getParameter('ldap_user'), $this->getParameter('ldap_password'));
-        if($this->connection) {
+        if ($this->connection) {
             $dn = "OU=AYUNCORDOBA,DC=ayuncordoba,DC=org";
             $filtro = "(|(displayname=*))";
             $solonecesito = array("samaccountname","dn","sn", "displayname","department","telephoneNumber","mail");

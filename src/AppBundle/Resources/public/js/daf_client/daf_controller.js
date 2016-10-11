@@ -9,7 +9,7 @@
  * @param $cv
  * @returns {{abstract: *, description: (*|string), issuedUser: *, requestUser: *, impactLevel: *, criticalLevel: *, inventory_number: *, commonError: *, user: *}}
  */
-var $getTicket = function($cv) {
+var getTicket = function($cv) {
     return {
         abstract:           $cv.find('#abstract').val(),
         description:        CKEDITOR.instances['description'].getData(),
@@ -26,16 +26,16 @@ var $getTicket = function($cv) {
 
 /**
  *
- * @param cv
+ * @param $cv
  * @param services
  * @returns {{user_name: *, user_surname: *, user_nif: *, user_dpt: *, user_services: *}}
  */
-var getUser = function(cv, services) {
+var getUser = function($cv, services) {
     return {
-        user_name:      cv.find('#new_user_name').val(),
-        user_surname:   cv.find('#new_user_surname').val(),
-        user_nif:       cv.find('#new_user_nif').val(),
-        user_dpt:       cv.find('#new_user_dpt').val(),
+        user_name:      $cv.find('#new_user_name').val(),
+        user_surname:   $cv.find('#new_user_surname').val(),
+        user_nif:       $cv.find('#new_user_nif').val(),
+        user_dpt:       $cv.find('#new_user_dpt').val(),
         user_services:  services
     };
 };
@@ -49,30 +49,30 @@ var getUser = function(cv, services) {
 
 /**
  *
- * @param $newTicket
+ * @param newTicket
  */
-var $setNewTicket = function ($newTicket) {
-    $('#abstract_label').text($newTicket.abstract);
-    $('#description_label').append($.parseHTML($newTicket.description));
-    $('#issuedUser_label').text($newTicket.issuedUser);
-    $('#requestUser_label').text($newTicket.requestUser);
-    $('#criticalLevel_label').text($newTicket.criticalLevel);
-    $('#impactLevel_label').text($newTicket.impactLevel);
-    $('#inventory_number_label').text($newTicket.inventory_number);
+var setNewTicket = function (newTicket) {
+    $('#abstract_label').text(newTicket.abstract);
+    $('#description_label').append($.parseHTML(newTicket.description));
+    $('#issuedUser_label').text(newTicket.issuedUser);
+    $('#requestUser_label').text(newTicket.requestUser);
+    $('#criticalLevel_label').text(newTicket.criticalLevel);
+    $('#impactLevel_label').text(newTicket.impactLevel);
+    $('#inventory_number_label').text(newTicket.inventory_number);
 };
 
 /**
  *
- * @param $newTicket
+ * @param newTicket
  */
-var $processTicket = function ($newTicket) {
-    if ($newTicket.commonError){
+var processTicket = function (newTicket) {
+    if (newTicket.commonError) {
         view.ticket_managingError.render();
     } else {
         view.ticket_preConfirm.render();
-        $setNewTicket($newTicket);
+        setNewTicket(newTicket);
 
-        $user = _.findWhere(DATA.ldapUsers, { usuario_id: $newTicket.user});
+        $user = _.findWhere(DATA.ldapUsers, { usuario_id: newTicket.user});
         $('#issuedUser_name_label').text($user.displayname);
         $('#issuedUser_login_label').text($user.usuario_id);
     }
@@ -80,19 +80,38 @@ var $processTicket = function ($newTicket) {
 
 /**
  *
- * @param $newUser
+ * @param newUser
  */
-var processUser = function ($newUser) {
+var processUser = function (newUser) {
 
     view.user_preConfirm.render();
-    $('#new_user_name_label').text($newUser.user_name);
-    $('#new_user_surname_label').text($newUser.user_surname);
-    $('#new_user_nif_label').text($newUser.user_nif);
-    $('#new_user_dpt_label').text($newUser.user_dpt);
-    $($newUser.user_services).each(function() {
+    $('#new_user_name_label').text(newUser.user_name);
+    $('#new_user_surname_label').text(newUser.user_surname);
+    $('#new_user_nif_label').text(newUser.user_nif);
+    $('#new_user_dpt_label').text(newUser.user_dpt);
+    $(newUser.user_services).each(function() {
         $('#new_user_services_label').append(
             this.action + " en " + this.name + " | " + "Vigencia: " + this.life + ", Info: " + this.info +'<br>'
         );
+    });
+
+    var services_to_set = [];
+    $(newUser.user_services).each(function(index) {
+        services_to_set[index] = _.findWhere(DATA.services, { nombre: this.name});
+    });
+
+    $("#submit_new_user").on("click", function () {
+        $.post(
+            "createUser",
+            {
+                username:       newUser.user_name,
+                user_surname:   newUser.user_surname,
+                user_idNumber:  newUser.user_nif,
+                user_dpt:       newUser.user_dpt,
+                services: services_to_set
+            }, function(response){
+                console.log(response)
+            }, "json");
     });
 };
 
@@ -150,10 +169,10 @@ function index_controller() {
     });
 }
 
-function writeHardwareInfo(hardware, cv) {
-    var $machineInfo = cv.find('machineInfo');
-    $($machineInfo+'.row:nth-child(1) .col:nth-child(2)').val(hardware.cod_item);
-    $($machineInfo+'.row:nth-child(1) .col:nth-child(2)').val(hardware.n_serie);
+function writeHardwareInfo(hardware, $cv) {
+    var machineInfo = $cv.find('machineInfo');
+    $(machineInfo+'.row:nth-child(1) .col:nth-child(2)').val(hardware.cod_item);
+    $(machineInfo+'.row:nth-child(1) .col:nth-child(2)').val(hardware.n_serie);
 }
 
 function ticket_new_controller() {
@@ -162,8 +181,8 @@ function ticket_new_controller() {
     var $cv = $('#foreground');
     $cv.find('#submit_new_ticket').off('click');
     $cv.find('#submit_new_ticket').on('click', function() {
-        var $newTicket = $getTicket($cv);
-        $processTicket($newTicket);
+        var newTicket = getTicket($cv);
+        processTicket(newTicket);
     });
 
     $cv.find('#differentUser').off('click');
@@ -179,7 +198,7 @@ function ticket_new_controller() {
 function ticket_preConfirm_controller() {
     routing.push('ticket_preConfirm');
     var $cv = $('#foreground_preConfirm');
-    var newTicket = $getTicket($cv);
+    var newTicket = getTicket($cv);
 
     $.ajax({
         url:        "/machines/'"+ newTicket.inventory_number.replace('-','') + "'",
@@ -200,11 +219,11 @@ function ticket_preConfirm_controller() {
 
     $mcv.find('#confirm_bt').off('click');
     $mcv.find('#confirm_bt').on('click', function() {
-        var $body = {
+        var body = {
             body: CKEDITOR.instances['send_notification'].getData()
         };
         app.peticion(
-            'POST', 'email', $body, 'json',
+            'POST', 'email', body, 'json',
             function (rsp) {
                 toastr.success('Email enviado con éxito');
                 location.reload();
@@ -222,7 +241,7 @@ function user_new_controller() {
 
     routing.push('user_new');
 
-    var cv                             = $('#foreground_newUser'),
+    var $cv                            = $('#foreground_newUser'),
         services_table                 = new Tabla ('services_table', true, true),
         services_column_filter         = new Filtro,
         services_filter                = new Filtro;
@@ -233,7 +252,7 @@ function user_new_controller() {
 
     services = [];
 
-    cv.find('.checkbox').on('click', function(ev) {
+    $cv.find('.checkbox').on('click', function(ev) {
         var id      = ev.currentTarget.getAttribute('data-id');
         var col     = $(this).parent().index();
         var action;
@@ -271,7 +290,7 @@ function user_new_controller() {
         }
     });
 
-    cv.find('.textarea1').on('change', function(ev) {
+    $cv.find('.textarea1').on('change', function(ev) {
 
         var id      = ev.currentTarget.getAttribute('data-id');
         var life    = $(this).find('textarea').val();
@@ -294,7 +313,7 @@ function user_new_controller() {
         }
     });
 
-    cv.find('.textarea2').on('change', function(ev) {
+    $cv.find('.textarea2').on('change', function(ev) {
         var id      = ev.currentTarget.getAttribute('data-id');
         var info    = $(this).find('textarea').val();
         if (services.length > 0) {
@@ -328,8 +347,8 @@ function user_new_controller() {
         services_pagination_refresh();
     });
 
-    cv.find('#buscador_services').off('change');
-    cv.find('#buscador_services').on('keyup', function(ev) {
+    $cv.find('#buscador_services').off('change');
+    $cv.find('#buscador_services').on('keyup', function(ev) {
         if(espera) clearTimeout(espera);
         var espera = setTimeout(function(){
             services_filter.add_condicion('*', "%"+ev.currentTarget.value, 'services_filter');
@@ -344,9 +363,9 @@ function user_new_controller() {
         services_pagination.refrescar();
     }
 
-    cv.find('#submit_preConfirm').off('click');
-    cv.find('#submit_preConfirm').on('click', function(ev) {
-        var $newUser = getUser(cv, services);
-        processUser($newUser);
+    $cv.find('#submit_preConfirm').off('click');
+    $cv.find('#submit_preConfirm').on('click', function(ev) {
+        var newUser = getUser($cv, services);
+        processUser(newUser);
     });
 }

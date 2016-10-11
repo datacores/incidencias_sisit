@@ -12,7 +12,8 @@ var DATA = {
     services:    [],
     impact:      [],
     criticality: [],
-    ldapUsers:   []
+    ldapUsers:   [],
+    groups:      []
 };
 
 // Objeto para gestionar la carga inicial de datos
@@ -22,8 +23,9 @@ var load_index = {
     impact:      false,
     criticality: false,
     ldapUsers:   false,
+    groups:      false,
     test: function() { // Testea si se ha terminado la carga inicial, y ejecuta acciones asociadas
-        if (this.machines && this.services && this.impact && this.criticality && this.ldapUsers) {
+        if (this.groups && this.machines && this.services && this.impact && this.criticality && this.ldapUsers) {
             index();
             modal.cargando_datos.cierra_modal();
         }
@@ -61,7 +63,7 @@ function set_action_back(obj){
 $(document).ready (function() {
 
     modal.cargando_datos.abre_modal();
-    var data_types = ["machines", "services", "impact", "criticality", "ldapUsers"];
+    var data_types = ["machines", "services", "impact", "criticality", "ldapUsers", "groups"];
 
     _.each(data_types, function(td) {
         app.peticion(

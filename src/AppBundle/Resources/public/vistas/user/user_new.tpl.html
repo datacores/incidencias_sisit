@@ -106,7 +106,12 @@
 				<div class="col-xs-5 col-md-5 col-sm-5 col-lg-5">
 					<div class="form-group">
 						<b>Área/Departamento </b>
-						<input title="Departamento" id="new_user_dpt" class="form-control"/>
+						<select id="new_user_dpt" title ="Departamento" style="width: 100%" class="js-example-basic-single form-control">
+							<option value=null></option>
+							<% $.each (DATA.groups, function () {
+							print ('<option value=' + this.id + '>' + this.nombre + '</option>');
+							});%>
+						</select>
 					</div>
 				</div>
 			</div>
