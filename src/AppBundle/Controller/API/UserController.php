@@ -48,46 +48,22 @@ class UserController extends Controller
     {
         if ($request->getMethod() == 'POST') {
             $conn   = $this->get('database_connection');
-            $username       = $request->request->get("username");
-            $user_surname   = $request->request->get("user_surname");
-            $user_idNumber  = $request->request->get("user_idNumber");
-            $user_dpt       = $request->request->get("user_dpt");
-            $services       = $request->request->get("services");
-
-
-            $conn->exec(
-                "INSERT INTO usuarios (
-                    password,                        
-                    id_grupo,                         
-                    estado,                           
-                    super_usuario,                    
-                    externo,                          
-                    vip,                              
-                    crear_alertas,                    
-                    usuariocorreo,                    
-                    usuarioanonimo,                   
-                    usuarioldap,                      
-                    fecha_creacion,         
-                    ultima_modificacion,        
-                    nivel,                      
-                    ultima_modificacion_tecnico
-                ) VALUES (
-                        '".strval(md5($username. " " .$user_surname))."',
-                        ".strval($user_dpt).",
-                        1,
-                        0,
-                        0,
-                        0,
-                        0,
-                        0,
-                        0,
-                        0,
-                        '".strval(date("Y-m-d H:i:s"))."',
-                        '".strval(date("Y-m-d H:i:s"))."',
-                        0,
-                        0
-                );");
-
+            $conn->exec("
+              INSERT INTO solicitantes(
+                ubicacion, nombre, login, apellidos, idsede, idunidad, activado, ultima_modificacion, 
+                ultima_modificacion_tecnico
+              ) VALUES (
+                ubicacion,
+                nombre,
+                login,
+                apellidos,
+                idsede,
+                idunidad,
+                activado,
+                ultima_modificacion,
+                ultima_modificacion_tecnico,
+              )
+            ");
             $response = Response::HTTP_OK;
         } else {
             $response = Response::HTTP_METHOD_NOT_ALLOWED;

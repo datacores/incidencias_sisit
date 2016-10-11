@@ -350,7 +350,7 @@ function user_new_controller() {
     $cv.find('#buscador_services').off('change');
     $cv.find('#buscador_services').on('keyup', function(ev) {
         if(espera) clearTimeout(espera);
-        var espera = setTimeout(function(){
+        var espera = setTimeout(function() {
             services_filter.add_condicion('*', "%"+ev.currentTarget.value, 'services_filter');
             services_pagination_refresh();
         }, 1000);
