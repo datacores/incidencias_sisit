@@ -290,29 +290,6 @@ function user_new_controller() {
         }
     });
 
-    $cv.find('.textarea1').on('change', function(ev) {
-
-        var id      = ev.currentTarget.getAttribute('data-id');
-        var life    = $(this).find('textarea').val();
-
-        if (services.length > 0) {
-            var service = _.findWhere(services, { name: id});
-
-            services = jQuery.grep(services, function(value) {
-                return value.name != id;
-            });
-
-            if (service) {
-                services.push({
-                    name:   id,
-                    action: service.action,
-                    life:   life,
-                    info:   service.info
-                });
-            }
-        }
-    });
-
     $cv.find('.textarea2').on('change', function(ev) {
         var id      = ev.currentTarget.getAttribute('data-id');
         var info    = $(this).find('textarea').val();
@@ -327,7 +304,6 @@ function user_new_controller() {
                 services.push({
                     name:   id,
                     action: service.action,
-                    life:   service.life,
                     info:   info
                 });
             }

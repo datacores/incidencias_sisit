@@ -38,16 +38,20 @@ class LdapController extends Controller
             $i = 0;
             foreach($info as $key => $value){
                 if($key != "count"){
-                    $this->users[$i]['usuario_id'] = $value['samaccountname'][0];
-                    if(isset($value['displayname'][0]))
-                        $this->users[$i]['displayname']=$value["displayname"][0];
-                    if(isset($value['dn'][0]))
-                        $this->users[$i]['departamento']=$value["dn"];
-                    if(isset($value['telephonenumber'][0]))
-                        $this->users[$i]['telefono']=$value["telephonenumber"][0];
-                    if(isset($value['mail'][0]))
-                        $this->users[$i]['mail']=$value["mail"][0];
-                    $i++;
+                    $long = strlen($value['samaccountname'][0]);
+                    if(($long == 4 || $long == 5) && stripos($value['displayname'][0], 'prueba') === false
+                        && stripos($value['displayname'][0], $value['samaccountname'][0]) === false ){
+                        $this->users[$i]['usuario_id'] = $value['samaccountname'][0];
+                        if(isset($value['displayname'][0]))
+                            $this->users[$i]['displayname']=$value["displayname"][0];
+                        if(isset($value['dn'][0]))
+                            $this->users[$i]['departamento']=$value["dn"];
+                        if(isset($value['telephonenumber'][0]))
+                            $this->users[$i]['telefono']=$value["telephonenumber"][0];
+                        if(isset($value['mail'][0]))
+                            $this->users[$i]['mail']=$value["mail"][0];
+                        $i++;
+                    }
                 }
             }
             $this->disconnect();
@@ -65,5 +69,3 @@ class LdapController extends Controller
         ldap_set_option($this->connection, LDAP_OPT_PROTOCOL_VERSION, 3);
     }
 }
-
-$ldap = new LdapController();
