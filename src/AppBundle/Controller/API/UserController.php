@@ -20,7 +20,7 @@ class UserController extends Controller
      */
     public function getServicesAction()
     {
-        $conn = $this->get('database_connection');
+        $conn   = $this->get('database_connection');
         $services = $conn->fetchAll(
             'SELECT nombre FROM sisit.net_servicios where final = 1 and nombre != "" ORDER BY nombre;'
         );
@@ -33,7 +33,7 @@ class UserController extends Controller
      */
     public function getGroupsAction()
     {
-        $conn = $this->get('database_connection');
+        $conn   = $this->get('database_connection');
         $services = $conn->fetchAll(
             'SELECT id, nombre FROM sisit.grupos ORDER BY nombre;'
         );
@@ -47,7 +47,7 @@ class UserController extends Controller
     public function createUserAction(Request $request)
     {
         if ($request->getMethod() == 'POST') {
-            $conn           = $this->get('database_connection');
+            $conn   = $this->get('database_connection');
             $username       = $request->request->get("username");
             $user_surname   = $request->request->get("user_surname");
             $user_idNumber  = $request->request->get("user_idNumber");
